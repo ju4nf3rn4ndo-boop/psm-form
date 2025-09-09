@@ -7,44 +7,12 @@
   <style>
     :root{--b:#e5e7eb;--bg:#fafafa}
     body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;padding:24px}
-
-    /* ↑↑ Ajuste de ancho para que respire más */
-    .container{
-      max-width:1400px;                 /* antes 1200px */
-      margin:0 auto;
-      background:white;
-      border:1px solid var(--b);
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(0,0,0,.06);
-      padding:20px
-    }
+    .container{max-width:1200px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
     h1{margin:0 0 12px 0}
-
-    /* ↑↑ Grid robusto con ancho mínimo por celda */
-    .meta{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(220px,1fr)); /* evita solapamientos */
-      gap:14px;
-      margin-bottom:16px
-    }
-    .meta > div{ min-width:0 } /* permite que los inputs no desborden la celda */
-
+    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
     label{font-weight:600;font-size:14px}
-
-    /* ↑↑ Controles consistentes y sin overflow */
-    input,select,textarea{
-      width:100%;
-      box-sizing:border-box;            /* clave: evita que el padding rompa el grid */
-      padding:10px;
-      border:1px solid var(--b);
-      border-radius:8px;
-      background:white;
-      min-height:42px;
-      line-height:1.25;
-    }
-    input[type="date"]{ min-height:42px }
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--b);border-radius:8px;background:white}
     textarea{resize:vertical}
-
     .toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 16px 0;flex-wrap:wrap}
     button{padding:10px 14px;border:1px solid var(--b);border-radius:8px;background:#111827;color:white;font-weight:600;cursor:pointer}
     button.secondary{background:white;color:#111827}
@@ -69,28 +37,27 @@
     .guide ul { margin:6px 0 12px 18px; }
     .guide li { margin:3px 0; }
 
-    /* --- Tabla robusta, sin superposiciones --- */
+    /* Barra de progreso */
+    .progress-wrap {display:flex;align-items:center;gap:10px;margin:6px 0 14px 0}
+    .progress {
+      flex:1;height:10px;border-radius:999px;background:#eef2ff;border:1px solid #c7d2fe;overflow:hidden;
+    }
+    .progress > div {height:100%; width:0%;}
+    .progress .bar {background:#4f46e5;transition:width .25s ease}
+    .progress .pct {min-width:52px;text-align:right;font-size:12px;color:#111}
+
+    /* Tabla */
     table{ table-layout:fixed; border-collapse:collapse; width:100% }
     th, td{ border:1px solid var(--b); padding:10px; vertical-align:top; word-wrap:break-word }
     thead th{position:sticky;top:0;background:#111827;color:white;z-index:1}
-    input[type="number"], input[type="text"], textarea{
-      display:block; width:100%; max-width:100%; margin:0;
-    }
+    input[type="number"], input[type="text"], textarea{display:block;width:100%;max-width:100%;box-sizing:border-box;margin:0;line-height:1.25;}
     td:nth-child(4) input[type="number"]{ height:38px; }
     td:nth-child(5) input[type="text"]{ min-height:38px; }
     td:nth-child(6) textarea{ min-height:60px; }
     td{ overflow:hidden; }
 
-    /* --- Breakpoints para que el grid sea fluido --- */
-    @media (max-width:1200px){
-      .meta{ grid-template-columns:repeat(3, minmax(220px,1fr)) }
-    }
-    @media (max-width:900px){
-      .meta{ grid-template-columns:repeat(2, minmax(220px,1fr)) }
-    }
-    @media (max-width:600px){
-      .meta{ grid-template-columns:1fr }
-    }
+    /* Errores de validación */
+    .error { border-color:#b00020 !important; outline-color:#b00020 !important; }
   </style>
 </head>
 <body>
@@ -124,11 +91,17 @@
     <div><label>Nombre</label><input id="nombre" required></div>
     <div><label>Apellido</label><input id="apellido" required></div>
     <div><label>Área / Equipo</label><input id="area" placeholder="Operaciones, Mantenimiento, HSE…" required></div>
-    <div><label>Fecha</label><input id="fecha" type="date"></div>
+    <!-- SIN campo de fecha editable -->
     <div><label>Responder por</label><select id="modo"><option>Usuario</option><option>Área</option></select></div>
     <div><label>Pilar</label><select id="pilar"></select></div>
     <div><label>Elemento</label><select id="elemento"></select></div>
     <div><label>Componente</label><select id="componente"></select></div>
+  </div>
+
+  <!-- Progreso -->
+  <div class="progress-wrap">
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="pct" id="pct">0%</div>
   </div>
 
   <div class="toolbar">
@@ -153,7 +126,7 @@
         <th>QuestionID</th>
         <th>Pregunta</th>
         <th>Guía de nivel</th>
-        <th>Calificación</th>
+        <th>Calif. (1–10)</th>
         <th>Registro</th>
         <th>Observaciones</th>
       </tr>
@@ -165,10 +138,11 @@
 <script>
 /* =================== CONFIG =================== */
 const JSON_URL = "preguntas.json?v=1";
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzeyrl7uh88IeH7uS01LtemFRVgIAyc5kySvSlgZjNHHlqL5rB3t9stuqjWWU8Dogy8/exec";
+const ENDPOINT = "PEGAR_URL_APPSSCRIPT_AQUI"; // <-- reemplaza por tu /exec actual
 
 /* =================== ESTADO =================== */
 let DATA = null;
+let TOTAL = 0;
 const slug = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
 
 /* =================== CARGA DE JSON =================== */
@@ -208,11 +182,8 @@ document.getElementById('filtrar').addEventListener('click', ()=>{
   else if (p && !e) items = byComp(Object.values(DATA[p]||{}).flat());
   else items = byComp(Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat()));
 
-  const num = qid => {
-    const t = String(qid||'').split('-').pop();
-    const n = parseInt(t,10);
-    return isNaN(n)? Infinity : n;
-  };
+  // Orden por número final del QuestionID
+  const num = qid => { const t = String(qid||'').split('-').pop(); const n = parseInt(t,10); return isNaN(n)? Infinity : n; };
   items.sort((a,b)=> num(a.id) - num(b.id));
 
   renderRows(items, p || 'Todos', e || 'Todos', c || '');
@@ -243,9 +214,26 @@ function renderRows(items, pilar, elemento, componente){
     tb.appendChild(tr);
   });
 
+  // contar y setear progreso
+  TOTAL = items.length;
+  updateProgress();
+
+  // autosave + progreso en input
   document.querySelectorAll('[data-id]').forEach(n=>{
-    n.addEventListener('input', scheduleAutosave);
+    n.addEventListener('input', ()=>{
+      scheduleAutosave();
+      updateProgress();
+      if (n.dataset.k === 'calificacion') n.classList.remove('error');
+    });
   });
+}
+
+/* =================== PROGRESO =================== */
+function updateProgress(){
+  const filled = Array.from(document.querySelectorAll('input[data-k="calificacion"]')).filter(i=>i.value).length;
+  const pct = TOTAL ? Math.round((filled / TOTAL) * 100) : 0;
+  document.getElementById('bar').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
 }
 
 /* =================== RECOLECCIÓN =================== */
@@ -257,9 +245,9 @@ function collectRows(){
   const nombre = document.getElementById('nombre').value.trim();
   const apellido = document.getElementById('apellido').value.trim();
   const area = document.getElementById('area').value.trim();
-  const fecha = document.getElementById('fecha').value || new Date().toISOString().slice(0,10);
   const modo = document.getElementById('modo').value;
 
+  // Toma texto visible si value viene vacío
   const pSel = document.getElementById('pilar');
   const eSel = document.getElementById('elemento');
   const cSel = document.getElementById('componente');
@@ -275,10 +263,12 @@ function collectRows(){
     map[id][k] = n.value;
   });
   const rows = Object.entries(map)
-    .filter(([,v])=>v.calificacion)
+    .filter(([,v])=>v.calificacion) // solo envía filas con calificación
     .map(([id,v])=>({
       submissionId: makeSubmissionId(nombre, apellido, area),
-      nombre, apellido, area, fecha, modo,
+      nombre, apellido, area,
+      fecha: "",                 // la fecha real la pone el backend
+      modo,
       pilar, elemento, componente,
       pregunta_id: id,
       calificacion: Number(v.calificacion),
@@ -288,8 +278,25 @@ function collectRows(){
   return rows;
 }
 
+/* =================== VALIDACIÓN ANTES DE ENVIAR =================== */
+function validateAllAnswered(){
+  // Todas las preguntas visibles deben tener calificación
+  const califs = Array.from(document.querySelectorAll('input[data-k="calificacion"]'));
+  califs.forEach(i=>i.classList.remove('error'));
+  const missing = califs.filter(i=>!i.value);
+  if (missing.length){
+    missing.forEach(i=>i.classList.add('error'));
+    missing[0].scrollIntoView({behavior:'smooth', block:'center'});
+    setStatus(`Faltan ${missing.length} calificaciones. Complétalas antes de enviar.`, true);
+    return false;
+  }
+  return true;
+}
+
 /* =================== ENVÍO =================== */
 document.getElementById('enviar').addEventListener('click', async()=>{
+  if(!validateAllAnswered()) return;
+
   const rows = collectRows();
   if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
   if(!ENDPOINT || ENDPOINT.includes('PEGAR_URL_APPSSCRIPT_AQUI')){
@@ -303,7 +310,7 @@ document.getElementById('enviar').addEventListener('click', async()=>{
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({rows})
     });
-    setStatus('✅ Formulario Enviado.');
+    setStatus('✅ Formulario enviado. Revisa el XLSX generado y el maestro.');
     clearAutosave();
   }catch(err){
     setStatus('❌ Error al enviar', true);
@@ -317,10 +324,7 @@ document.getElementById('descargar').addEventListener('click', ()=>{
   const headers = Object.keys(rows[0]);
   const csv = [headers.join(',')].concat(rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))).join('\n');
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'respuestas_psm.csv';
-  a.click();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'respuestas_psm.csv'; a.click();
 });
 function csvEsc(v){ let s = String(v==null?'':v); if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"'; return s; }
 function setStatus(t, err=false){ const el = document.getElementById('status'); el.textContent = t; el.style.color = err? '#b00020':'#0a7a0a'; }
@@ -339,9 +343,9 @@ let saveTimer=null;
 function scheduleAutosave(){
   document.getElementById('autosave').textContent = 'Guardando borrador…';
   if(saveTimer) clearTimeout(saveTimer);
-  saveTimer = setTimeout(persist, 600);
+  saveTimer = setTimeout(persist, 500);
 }
-['nombre','apellido','area','fecha','modo','pilar','elemento','componente'].forEach(id=>{
+['nombre','apellido','area','modo','pilar','elemento','componente'].forEach(id=>{
   const el = document.getElementById(id);
   el && el.addEventListener('input', scheduleAutosave);
 });
@@ -352,7 +356,6 @@ function persist(){
       nombre: document.getElementById('nombre').value,
       apellido: document.getElementById('apellido').value,
       area: document.getElementById('area').value,
-      fecha: document.getElementById('fecha').value,
       modo: document.getElementById('modo').value,
       pilar: document.getElementById('pilar').value,
       elemento: document.getElementById('elemento').value,
@@ -386,11 +389,10 @@ function restoreAnswers(){
       }
     }
     document.getElementById('autosave').textContent = 'Borrador restaurado';
+    updateProgress();
   }catch(_){}
 }
 function clearAutosave(){ localStorage.removeItem(lsKey()); document.getElementById('autosave').textContent = ''; }
-
-// window.addEventListener('load', ()=> setTimeout(()=> document.getElementById('filtrar').click(), 400));
 </script>
 </body>
 </html>
