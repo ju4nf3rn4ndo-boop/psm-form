@@ -17,40 +17,31 @@
     button{padding:10px 14px;border:1px solid var(--b);border-radius:8px;background:#111827;color:white;font-weight:600;cursor:pointer}
     button.secondary{background:white;color:#111827}
     .status{margin-left:8px}
-    table{width:100%;border-collapse:collapse}
-    thead th{position:sticky;top:0;background:#111827;color:white;padding:8px;border:1px solid var(--b);z-index:1}
-    tbody td{border:1px solid var(--b);padding:8px;vertical-align:top}
     .small{font-size:12px;color:#374151}
     details{margin-top:4px}
-    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin-left:6px}
+    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
     .right{margin-left:auto}
 
-    /* FIX de layout de celdas */
-    table{ table-layout:fixed }              /* que respete anchos */
-    th,td{ word-wrap:break-word; }
-
-    /* Los campos ocupan el ancho completo de su celda y no se superponen */
-    input[type="number"],
-    input[type="text"],
-    textarea{
-      display:block;
-      width:100%;
-      max-width:100%;
-      box-sizing:border-box;
-      line-height:1.25;
+    /* --- Tabla robusta, sin superposiciones --- */
+    table{ table-layout:fixed; border-collapse:collapse; width:100% }
+    th, td{ border:1px solid var(--b); padding:10px; vertical-align:top; word-wrap:break-word }
+    thead th{position:sticky;top:0;background:#111827;color:white;z-index:1}
+    /* Controles ocupan su celda sin salirse */
+    input[type="number"], input[type="text"], textarea{
+      display:block; width:100%; max-width:100%; box-sizing:border-box; margin:0; line-height:1.25;
     }
-    
-    /* Evita que el contenido “empuje” a vecinos */
+    td:nth-child(4) input[type="number"]{ height:38px; }
+    td:nth-child(5) input[type="text"]{ min-height:38px; }
+    td:nth-child(6) textarea{ min-height:60px; }
     td{ overflow:hidden; }
-    
-    /* Un poquito más de aire entre controles */
-    tbody td{ padding:10px; }    
   </style>
 </head>
 <body>
 <div class="container">
   <h1>Encuesta PSM</h1>
-  <div id="intro" class="small" style="margin-bottom:10px;"></div>
+  <div id="intro" class="small" style="margin-bottom:10px;">
+    Diligencia según pilar/elemento/componente. Ingresa calificación, evidencia y observaciones. La guía describe los niveles.
+  </div>
 
   <div class="meta">
     <div><label>Nombre</label><input id="nombre" required></div>
@@ -72,14 +63,23 @@
   </div>
 
   <table id="tabla">
+    <!-- colgroup fija anchos y evita que los inputs se monten -->
+    <colgroup>
+      <col style="width:14%">
+      <col style="width:34%">
+      <col style="width:18%">
+      <col style="width:8%">
+      <col style="width:12%">
+      <col style="width:14%">
+    </colgroup>
     <thead>
       <tr>
-        <th style="width:14%">QuestionID</th>
-        <th style="width:34%">Pregunta</th>
-        <th style="width:18%">Guía de nivel</th>
-        <th style="width:8%">Calif. (1–10)</th>
-        <th style="width:12%">Registro</th>
-        <th style="width:14%">Observaciones</th>
+        <th>QuestionID</th>
+        <th>Pregunta</th>
+        <th>Guía de nivel</th>
+        <th>Calif. (1–10)</th>
+        <th>Registro</th>
+        <th>Observaciones</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -87,49 +87,70 @@
 </div>
 
 <script>
-const JSON_URL = "preguntas.json";
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzcXqNkmIXvWQcDmsbxVlfnCI4LgvVtlOFvUm46KuRvfrZ50ZhaK2oUOMG3mpmI7wwk/exec"; // Apps Script opcional
-const INTRO_TXT = ""; // si quieres inyectar INSTRUCCIONES!B7 aquí
+/* =================== CONFIG =================== */
+const JSON_URL = "preguntas.json?v=1";       // cache-busting simple
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbymbxhKKqd_NxwTfirgepSA6DbAqWgcqix-HvOGKUhP46g2w5BhtxsXDioUfWz6u30c/exec"; // ← pega aquí tu URL /exec del Web App
 
-let DATA = null; // {Pilar:{Elemento:[...]}} con componente por item
+/* =================== ESTADO =================== */
+let DATA = null; // {Pilar:{Elemento:[{id,componente,pregunta,niveles},...]}}
+const slug = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
 
-document.getElementById('intro').textContent = INTRO_TXT ||
-  "Diligencia según pilar/elemento/componente. Ingresa calificación, evidencia y observaciones. La guía describe los niveles.";
-
-// ---------- Carga de preguntas ----------
+/* =================== CARGA DE JSON =================== */
 fetch(JSON_URL).then(r=>r.json()).then(d=>{
   DATA = d;
-  // cargar pilares
+  // Cargar combos
   const pSel = document.getElementById('pilar');
-  pSel.innerHTML = '<option value="">Selecciona…</option>' + Object.keys(DATA).map(p=>`<option>${p}</option>`).join('');
+  pSel.innerHTML = '<option value="">(Todos)</option>' + Object.keys(DATA).map(p=>`<option>${p}</option>`).join('');
   pSel.addEventListener('change', ()=>{
     const elSel = document.getElementById('elemento');
-    elSel.innerHTML = '<option value="">Selecciona…</option>';
-    document.getElementById('componente').innerHTML = '<option value="">Todos</option>';
+    elSel.innerHTML = '<option value="">(Todos)</option>';
+    document.getElementById('componente').innerHTML = '<option value="">(Todos)</option>';
     if(!pSel.value) return;
     const elems = Object.keys(DATA[pSel.value]||{});
     elSel.innerHTML += elems.map(e=>`<option>${e}</option>`).join('');
     saveMeta();
   });
   document.getElementById('elemento').addEventListener('change', ()=>{
-    const comps = [...new Set((DATA[document.getElementById('pilar').value]?.[document.getElementById('elemento').value]||[]).map(q=>q.componente))];
-    document.getElementById('componente').innerHTML = '<option value="">Todos</option>' + comps.map(c=>`<option>${c}</option>`).join('');
+    const p = document.getElementById('pilar').value;
+    const e = document.getElementById('elemento').value;
+    const comps = [...new Set((DATA[p]?.[e]||[]).map(q=>q.componente))];
+    document.getElementById('componente').innerHTML = '<option value="">(Todos)</option>' + comps.map(c=>`<option>${c}</option>`).join('');
     saveMeta();
   });
   document.getElementById('componente').addEventListener('change', saveMeta);
 });
 
+/* =================== CARGAR / ORDENAR =================== */
 document.getElementById('filtrar').addEventListener('click', ()=>{
   const p = document.getElementById('pilar').value;
   const e = document.getElementById('elemento').value;
   const c = document.getElementById('componente').value;
-  if(!p || !e){ setStatus('Selecciona Pilar y Elemento', true); return; }
-  const items = (DATA[p]?.[e]||[]).filter(x=>!c || x.componente===c);
-  renderRows(items, p, e, c);
-  restoreAnswers(); // si hay cache, pintarlas
+
+  // recolectar items según filtros (si nada elegido, trae TODO)
+  let items = [];
+  const byComp = arr => c ? arr.filter(x=>x.componente===c) : arr;
+
+  if (p && e) {
+    items = byComp(DATA[p]?.[e] || []);
+  } else if (p && !e) {
+    items = byComp(Object.values(DATA[p]||{}).flat());
+  } else {
+    items = byComp(Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat()));
+  }
+
+  // ordenar por sufijo numérico del QuestionID (CO-XX-YY-###)
+  const num = qid => {
+    const t = String(qid||'').split('-').pop();
+    const n = parseInt(t,10);
+    return isNaN(n)? Infinity : n;
+  };
+  items.sort((a,b)=> num(a.id) - num(b.id));
+
+  renderRows(items, p || 'Todos', e || 'Todos', c || '');
+  restoreAnswers();
 });
 
-// ---------- Render de tabla ----------
+/* =================== RENDER DE TABLA =================== */
 function renderRows(items, pilar, elemento, componente){
   const tb = document.querySelector('#tabla tbody');
   tb.innerHTML = '';
@@ -138,9 +159,14 @@ function renderRows(items, pilar, elemento, componente){
     const niveles = x.niveles || {};
     const guia = Object.entries(niveles).map(([r,txt])=>`<div><b>${r}</b>: ${txt}</div>`).join('');
     tr.innerHTML = `
-      <td><span class="small">${x.id}</span><div class="pill">${pilar}</div><div class="pill">${elemento}</div><div class="pill">${x.componente}</div></td>
+      <td>
+        <div class="small">${x.id}</div>
+        <div class="pill">${pilar}</div>
+        <div class="pill">${elemento}</div>
+        <div class="pill">${x.componente}</div>
+      </td>
       <td>${x.pregunta}</td>
-      <td class="small"><details><summary>Ver guía</summary>${guia||'Sin guía'}</details></td>
+      <td class="small"><details><summary>► Ver guía</summary>${guia||'Sin guía'}</details></td>
       <td><input type="number" min="1" max="10" data-k="calificacion" data-id="${x.id}"></td>
       <td><input type="text" placeholder="Código doc, URL, ruta…" data-k="registro" data-id="${x.id}"></td>
       <td><textarea rows="2" data-k="observaciones" data-id="${x.id}"></textarea></td>
@@ -148,13 +174,17 @@ function renderRows(items, pilar, elemento, componente){
     tb.appendChild(tr);
   });
 
-  // Escuchar cambios para autosave
+  // autosave on input
   document.querySelectorAll('[data-id]').forEach(n=>{
     n.addEventListener('input', scheduleAutosave);
   });
 }
 
-// ---------- Recolección ----------
+/* =================== RECOLECCIÓN =================== */
+function makeSubmissionId(nombre, apellido, area){
+  const ts = new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
+  return `${slug(apellido)}_${slug(nombre)}_${slug(area)}_${ts}`;
+}
 function collectRows(){
   const nombre = document.getElementById('nombre').value.trim();
   const apellido = document.getElementById('apellido').value.trim();
@@ -168,46 +198,47 @@ function collectRows(){
   const inputs = Array.from(document.querySelectorAll('[data-id]'));
   const map = {}; // id -> obj
   inputs.forEach(n=>{
-    const id = n.dataset.id;
-    const k = n.dataset.k;
+    const id = n.dataset.id, k = n.dataset.k;
     map[id] = map[id] || { calificacion:null, registro:"", observaciones:"" };
     map[id][k] = n.value;
   });
-  const rows = Object.entries(map).filter(([,v])=>v.calificacion).map(([id,v])=>({
-    submissionId: makeSubmissionId(nombre, apellido, area),
-    nombre, apellido, area, fecha, modo,
-    pilar, elemento, componente,
-    pregunta_id: id,
-    calificacion: Number(v.calificacion),
-    registro: v.registro||"",
-    observaciones: v.observaciones||""
-  }));
+  const rows = Object.entries(map)
+    .filter(([,v])=>v.calificacion)
+    .map(([id,v])=>({
+      submissionId: makeSubmissionId(nombre, apellido, area),
+      nombre, apellido, area, fecha, modo,
+      pilar, elemento, componente,
+      pregunta_id: id,
+      calificacion: Number(v.calificacion),
+      registro: v.registro||"",
+      observaciones: v.observaciones||""
+    }));
   return rows;
 }
 
-function makeSubmissionId(nombre, apellido, area){
-  const t = new Date();
-  const ts = t.toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
-  return `${slug(apellido)}_${slug(nombre)}_${slug(area)}_${ts}`;
-}
-function slug(s){ return (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); }
-
-// ---------- Envío ----------
+/* =================== ENVÍO =================== */
 document.getElementById('enviar').addEventListener('click', async()=>{
   const rows = collectRows();
   if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
-  if(!ENDPOINT || ENDPOINT.includes('PEGAR_URL_APPSSCRIPT_AQUI')){ setStatus('Configura ENDPOINT (Apps Script) o usa Descargar CSV.', true); return; }
+  if(!ENDPOINT || ENDPOINT.includes('PEGAR_URL_APPSSCRIPT_AQUI')){
+    setStatus('Configura ENDPOINT (Apps Script) o usa Descargar CSV.', true); return;
+  }
   try{
     setStatus('Enviando…');
-    const res = await fetch(ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({rows}) });
-    const data = await res.json().catch(()=>({ok:true}));
-    setStatus(data.ok ? `✅ Enviado. Archivo: ${data.fileUrl||'—'}` : '❌ Error de servidor', !data.ok);
+    await fetch(ENDPOINT, {
+      method:'POST',
+      mode:'no-cors', // evita CORS; el Apps Script igual procesa
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({rows})
+    });
+    setStatus('✅ Enviado. Revisa PSM_Responses y la carpeta PSM_Envíos.');
     clearAutosave();
   }catch(err){
     setStatus('❌ Error al enviar', true);
   }
 });
 
+/* =================== CSV LOCAL =================== */
 document.getElementById('descargar').addEventListener('click', ()=>{
   const rows = collectRows();
   if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
@@ -219,21 +250,11 @@ document.getElementById('descargar').addEventListener('click', ()=>{
   a.download = 'respuestas_psm.csv';
   a.click();
 });
+function csvEsc(v){ let s = String(v==null?'':v); if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"'; return s; }
+function setStatus(t, err=false){ const el = document.getElementById('status'); el.textContent = t; el.style.color = err? '#b00020':'#0a7a0a'; }
 
-function csvEsc(v){
-  let s = String(v==null?'':v);
-  if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"';
-  return s;
-}
-
-function setStatus(t, err=false){
-  const el = document.getElementById('status');
-  el.textContent = t;
-  el.style.color = err? '#b00020':'#0a7a0a';
-}
-
-// ---------- Autosave (localStorage) ----------
-function lsKey(){ // clave única por usuario + pilar + elemento + componente
+/* =================== AUTOSAVE =================== */
+function lsKey(){
   const nombre = document.getElementById('nombre').value.trim();
   const apellido = document.getElementById('apellido').value.trim();
   const area = document.getElementById('area').value.trim();
@@ -242,8 +263,7 @@ function lsKey(){ // clave única por usuario + pilar + elemento + componente
   const c = document.getElementById('componente').value;
   return `psm:${slug(apellido)}:${slug(nombre)}:${slug(area)}:${slug(p)}:${slug(e)}:${slug(c)}`;
 }
-
-let saveTimer = null;
+let saveTimer=null;
 function scheduleAutosave(){
   document.getElementById('autosave').textContent = 'Guardando borrador…';
   if(saveTimer) clearTimeout(saveTimer);
@@ -253,7 +273,6 @@ function scheduleAutosave(){
   const el = document.getElementById(id);
   el && el.addEventListener('input', scheduleAutosave);
 });
-
 function persist(){
   const key = lsKey();
   const payload = {
@@ -277,19 +296,16 @@ function persist(){
   localStorage.setItem(key, JSON.stringify(payload));
   document.getElementById('autosave').textContent = 'Borrador guardado ✓';
 }
-
 function restoreAnswers(){
   const key = lsKey();
   const raw = localStorage.getItem(key);
   if(!raw) return;
   try{
     const data = JSON.parse(raw);
-    // restaurar meta si falta
     for(const [k,v] of Object.entries(data.meta||{})){
       const el = document.getElementById(k);
       if(el && !el.value) el.value = v;
     }
-    // restaurar respuestas
     const ans = data.answers||{};
     for(const [qid,vals] of Object.entries(ans)){
       for(const [k,val] of Object.entries(vals)){
@@ -300,11 +316,11 @@ function restoreAnswers(){
     document.getElementById('autosave').textContent = 'Borrador restaurado';
   }catch(_){}
 }
+function clearAutosave(){ localStorage.removeItem(lsKey()); document.getElementById('autosave').textContent = ''; }
 
-function clearAutosave(){
-  localStorage.removeItem(lsKey());
-  document.getElementById('autosave').textContent = '';
-}
+/* =================== ARRANQUE OPCIONAL =================== */
+// Si quieres cargar todas las preguntas apenas abre, descomenta:
+// window.addEventListener('load', ()=> setTimeout(()=> document.getElementById('filtrar').click(), 400));
 </script>
 </body>
 </html>
