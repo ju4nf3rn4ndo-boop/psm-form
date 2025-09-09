@@ -22,11 +22,25 @@
     .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
     .right{margin-left:auto}
 
+    /* Instrucciones */
+    .guide {
+      border:1px solid var(--b);
+      background:#f9fafb;
+      border-radius:10px;
+      padding:14px;
+      margin:10px 0 14px 0;
+      max-height:260px;
+      overflow:auto;
+      line-height:1.4;
+    }
+    .guide h3 { margin:6px 0 8px 0; }
+    .guide ul { margin:6px 0 12px 18px; }
+    .guide li { margin:3px 0; }
+
     /* --- Tabla robusta, sin superposiciones --- */
     table{ table-layout:fixed; border-collapse:collapse; width:100% }
     th, td{ border:1px solid var(--b); padding:10px; vertical-align:top; word-wrap:break-word }
     thead th{position:sticky;top:0;background:#111827;color:white;z-index:1}
-    /* Controles ocupan su celda sin salirse */
     input[type="number"], input[type="text"], textarea{
       display:block; width:100%; max-width:100%; box-sizing:border-box; margin:0; line-height:1.25;
     }
@@ -39,8 +53,28 @@
 <body>
 <div class="container">
   <h1>Encuesta PSM</h1>
-  <div id="intro" class="small" style="margin-bottom:10px;">
-    Diligencia según pilar/elemento/componente. Ingresa calificación, evidencia y observaciones. La guía describe los niveles.
+
+  <!-- Bloque instructivo -->
+  <div class="guide">
+    <h3>Instrucciones</h3>
+    <p>En la utilización de la herramienta para la construcción de una línea base de seguridad de procesos, basada en RBPS (Risk Based Process Safety), te recomendamos tener en cuenta lo siguiente:</p>
+    <ul>
+      <li>Para cada uno de los cuatro pilares de seguridad de procesos de acuerdo a RBPS, se desarrolló una pestaña con su nombre, que son:
+        <ul>
+          <li><b>COMPROMISO</b></li>
+          <li><b>ENTENDIMIENTO</b></li>
+          <li><b>GESTIÓN</b></li>
+          <li><b>APRENDER DE LA EXPERIENCIA</b></li>
+        </ul>
+      </li>
+      <li>En cada una de las pestañas mencionadas se han colocado los elementos propuestos en el modelo RBPS, y a cada uno de los elementos se les han propuesto unos factores críticos de éxito, los cuales se presentan en tres niveles de desarrollo que son: <b>BAJO</b>, <b>MEDIO</b> y <b>ALTO</b>.</li>
+      <li>En la casilla de <b>CALIFICACIÓN</b> debes colocar números enteros del 1 al 10 para calificar los niveles de desarrollo encontrados, así:
+        <div style="margin-left:14px">1–3: <b>BAJO</b> &nbsp; | &nbsp; 4–7: <b>MEDIO</b> &nbsp; | &nbsp; 8–10: <b>ALTO</b></div>
+      </li>
+      <li>En la pestaña resultados se pueden observar los desarrollos de cada uno de los elementos y en la parte inferior se totaliza la calificación del sistema de acuerdo a esta herramienta.</li>
+    </ul>
+    <p><b>NOTA:</b> La escala de valoración es lineal, en esta primera versión de la herramienta no se hizo ponderación para la calificación.</p>
+    <p class="small">Todos los derechos reservados. No se permite la reproducción total o parcial de ninguna parte de esta obra, ni su comercialización ni publicación en cualquier medio, sin el permiso previo y escrito de Seguros de Vida Suramericana S.A. © Propiedad Intelectual de ARL SURA, abril de 2018.</p>
   </div>
 
   <div class="meta">
@@ -63,7 +97,6 @@
   </div>
 
   <table id="tabla">
-    <!-- colgroup fija anchos y evita que los inputs se monten -->
     <colgroup>
       <col style="width:14%">
       <col style="width:34%">
@@ -88,17 +121,16 @@
 
 <script>
 /* =================== CONFIG =================== */
-const JSON_URL = "preguntas.json?v=1";       // cache-busting simple
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzeyrl7uh88IeH7uS01LtemFRVgIAyc5kySvSlgZjNHHlqL5rB3t9stuqjWWU8Dogy8/exec"; // ← pega aquí tu URL /exec del Web App
+const JSON_URL = "preguntas.json?v=1";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzeyrl7uh88IeH7uS01LtemFRVgIAyc5kySvSlgZjNHHlqL5rB3t9stuqjWWU8Dogy8/exec";
 
 /* =================== ESTADO =================== */
-let DATA = null; // {Pilar:{Elemento:[{id,componente,pregunta,niveles},...]}}
+let DATA = null;
 const slug = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
 
 /* =================== CARGA DE JSON =================== */
 fetch(JSON_URL).then(r=>r.json()).then(d=>{
   DATA = d;
-  // Cargar combos
   const pSel = document.getElementById('pilar');
   pSel.innerHTML = '<option value="">(Todos)</option>' + Object.keys(DATA).map(p=>`<option>${p}</option>`).join('');
   pSel.addEventListener('change', ()=>{
@@ -126,19 +158,13 @@ document.getElementById('filtrar').addEventListener('click', ()=>{
   const e = document.getElementById('elemento').value;
   const c = document.getElementById('componente').value;
 
-  // recolectar items según filtros (si nada elegido, trae TODO)
   let items = [];
   const byComp = arr => c ? arr.filter(x=>x.componente===c) : arr;
 
-  if (p && e) {
-    items = byComp(DATA[p]?.[e] || []);
-  } else if (p && !e) {
-    items = byComp(Object.values(DATA[p]||{}).flat());
-  } else {
-    items = byComp(Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat()));
-  }
+  if (p && e) items = byComp(DATA[p]?.[e] || []);
+  else if (p && !e) items = byComp(Object.values(DATA[p]||{}).flat());
+  else items = byComp(Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat()));
 
-  // ordenar por sufijo numérico del QuestionID (CO-XX-YY-###)
   const num = qid => {
     const t = String(qid||'').split('-').pop();
     const n = parseInt(t,10);
@@ -174,7 +200,6 @@ function renderRows(items, pilar, elemento, componente){
     tb.appendChild(tr);
   });
 
-  // autosave on input
   document.querySelectorAll('[data-id]').forEach(n=>{
     n.addEventListener('input', scheduleAutosave);
   });
@@ -191,12 +216,17 @@ function collectRows(){
   const area = document.getElementById('area').value.trim();
   const fecha = document.getElementById('fecha').value || new Date().toISOString().slice(0,10);
   const modo = document.getElementById('modo').value;
-  const pilar = document.getElementById('pilar').value;
-  const elemento = document.getElementById('elemento').value;
-  const componente = document.getElementById('componente').value;
+
+  // Toma texto visible si value viene vacío
+  const pSel = document.getElementById('pilar');
+  const eSel = document.getElementById('elemento');
+  const cSel = document.getElementById('componente');
+  const pilar = pSel.value || (pSel.options[pSel.selectedIndex]?.text || '');
+  const elemento = eSel.value || (eSel.options[eSel.selectedIndex]?.text || '');
+  const componente = cSel.value || (cSel.options[cSel.selectedIndex]?.text || '');
 
   const inputs = Array.from(document.querySelectorAll('[data-id]'));
-  const map = {}; // id -> obj
+  const map = {};
   inputs.forEach(n=>{
     const id = n.dataset.id, k = n.dataset.k;
     map[id] = map[id] || { calificacion:null, registro:"", observaciones:"" };
@@ -227,7 +257,7 @@ document.getElementById('enviar').addEventListener('click', async()=>{
     setStatus('Enviando…');
     await fetch(ENDPOINT, {
       method:'POST',
-      mode:'no-cors', // evita CORS; el Apps Script igual procesa
+      mode:'no-cors',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({rows})
     });
@@ -318,8 +348,6 @@ function restoreAnswers(){
 }
 function clearAutosave(){ localStorage.removeItem(lsKey()); document.getElementById('autosave').textContent = ''; }
 
-/* =================== ARRANQUE OPCIONAL =================== */
-// Si quieres cargar todas las preguntas apenas abre, descomenta:
 // window.addEventListener('load', ()=> setTimeout(()=> document.getElementById('filtrar').click(), 400));
 </script>
 </body>
