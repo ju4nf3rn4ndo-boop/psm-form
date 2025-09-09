@@ -24,6 +24,27 @@
     details{margin-top:4px}
     .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin-left:6px}
     .right{margin-left:auto}
+
+    /* FIX de layout de celdas */
+    table{ table-layout:fixed }              /* que respete anchos */
+    th,td{ word-wrap:break-word; }
+
+    /* Los campos ocupan el ancho completo de su celda y no se superponen */
+    input[type="number"],
+    input[type="text"],
+    textarea{
+      display:block;
+      width:100%;
+      max-width:100%;
+      box-sizing:border-box;
+      line-height:1.25;
+    }
+    
+    /* Evita que el contenido “empuje” a vecinos */
+    td{ overflow:hidden; }
+    
+    /* Un poquito más de aire entre controles */
+    tbody td{ padding:10px; }    
   </style>
 </head>
 <body>
