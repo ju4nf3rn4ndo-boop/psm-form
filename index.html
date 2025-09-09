@@ -6,117 +6,103 @@
   <title>Encuesta PSM</title>
   <style>
     :root{--b:#e5e7eb;--bg:#fafafa}
+    *{box-sizing:border-box}
     body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;padding:24px}
-    .container{max-width:1700px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
+    .container{max-width:1200px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
+
     h1{margin:0 0 12px 0}
-    .meta{display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;margin-bottom:16px}
 
-    /* Posiciones específicas por fila */
-    .meta .g-nombre      { grid-column: 1; }
-    .meta .g-apellido    { grid-column: 2; }
-    .meta .g-area        { grid-column: 1; }
-    .meta .g-modo        { grid-column: 2; }
-    .meta .g-pilar       { grid-column: 1; }
-    .meta .g-elemento    { grid-column: 3; }
-    .meta .g-componente  { grid-column: 3; }
-
-    /* Responsive: una sola columna en móviles */
-    @media (max-width: 900px){
-      .meta{ grid-template-columns: 1fr; }
-      .meta > div{ grid-column: 1 !important; }
+    /* Instrucciones */
+    .guide{
+      border:1px solid var(--b);background:#f9fafb;border-radius:10px;
+      padding:14px;margin:10px 0 16px 0;line-height:1.4
     }
-  
-    label{font-weight:600;font-size:14px}
+    .guide summary{cursor:pointer;font-weight:700}
+    .guide ul{margin:6px 0 12px 18px}
+
+    /* Grid meta en 3 columnas + posiciones */
+    .meta{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:10px
+    }
+    label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
     input,select,textarea{width:100%;padding:10px;border:1px solid var(--b);border-radius:8px;background:white}
-    textarea{resize:vertical}
-    .toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 16px 0;flex-wrap:wrap}
+
+    .g-nombre{grid-column:1}
+    .g-apellido{grid-column:2}
+    .g-area{grid-column:1}
+    .g-modo{grid-column:2}
+    .g-pilar{grid-column:1}
+    .g-elemento{grid-column:2}
+    .g-componente{grid-column:3}
+
+    @media (max-width: 900px){
+      .meta{grid-template-columns:1fr}
+      .meta > div{grid-column:1!important}
+    }
+
+    .toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 12px 0;flex-wrap:wrap}
     button{padding:10px 14px;border:1px solid var(--b);border-radius:8px;background:#111827;color:white;font-weight:600;cursor:pointer}
     button.secondary{background:white;color:#111827}
     .status{margin-left:8px}
     .small{font-size:12px;color:#374151}
-    details{margin-top:4px}
-    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
     .right{margin-left:auto}
 
-    /* Instrucciones */
-    .guide {
-      border:1px solid var(--b);
-      background:#f9fafb;
-      border-radius:10px;
-      padding:14px;
-      margin:10px 0 14px 0;
-      max-height:260px;
-      overflow:auto;
-      line-height:1.4;
-    }
-    .guide h3 { margin:6px 0 8px 0; }
-    .guide ul { margin:6px 0 12px 18px; }
-    .guide li { margin:3px 0; }
+    /* Progreso */
+    .progress-wrap{display:flex;align-items:center;gap:10px;margin:8px 0}
+    progress{width:100%;height:8px}
+    .pct{width:42px;text-align:right;font-variant-numeric:tabular-nums}
 
-    /* Barra de progreso */
-    .progress-wrap {display:flex;align-items:center;gap:10px;margin:6px 0 14px 0}
-    .progress {
-      flex:1;height:10px;border-radius:999px;background:#eef2ff;border:1px solid #c7d2fe;overflow:hidden;
-    }
-    .progress > div {height:100%; width:0%;}
-    .progress .bar {background:#4f46e5;transition:width .25s ease}
-    .progress .pct {min-width:52px;text-align:right;font-size:12px;color:#111}
-
-    /* Tabla */
-    table{ table-layout:fixed; border-collapse:collapse; width:100% }
-    th, td{ border:1px solid var(--b); padding:10px; vertical-align:top; word-wrap:break-word }
-    thead th{position:sticky;top:0;background:#111827;color:white;z-index:1}
-    input[type="number"], input[type="text"], textarea{display:block;width:100%;max-width:100%;box-sizing:border-box;margin:0;line-height:1.25;}
-    td:nth-child(4) input[type="number"]{ height:38px; }
-    td:nth-child(5) input[type="text"]{ min-height:38px; }
-    td:nth-child(6) textarea{ min-height:60px; }
-    td{ overflow:hidden; }
-
-    /* Errores de validación */
-    .error { border-color:#b00020 !important; outline-color:#b00020 !important; }
+    /* Tabla preguntas */
+    table{table-layout:fixed;border-collapse:collapse;width:100%}
+    th,td{border:1px solid var(--b);padding:10px;vertical-align:top;word-wrap:break-word}
+    thead th{position:sticky;top:0;background:#111827;color:white;z-index:2}
+    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
+    input[type="number"],input[type="text"],textarea{display:block;width:100%;max-width:100%;line-height:1.25}
+    td:nth-child(4) input[type="number"]{height:38px}
+    td:nth-child(5) input[type="text"]{min-height:38px}
+    td:nth-child(6) textarea{min-height:60px}
+    .error{outline:2px solid #b00020;border-color:#b00020}
   </style>
 </head>
 <body>
 <div class="container">
   <h1>Encuesta PSM</h1>
 
-  <!-- Bloque instructivo -->
-  <div class="guide">
-    <h3>Instrucciones</h3>
-    <p>En la utilización de la herramienta para la construcción de una línea base de seguridad de procesos, basada en RBPS (Risk Based Process Safety), te recomendamos tener en cuenta lo siguiente:</p>
+  <!-- Instrucciones -->
+  <details class="guide" open>
+    <summary>Instrucciones</summary>
+    <p>En la utilización de la herramienta para la construcción de una línea base de seguridad de procesos, basada en RBPS (Risk Based Process Safety), ten en cuenta:</p>
     <ul>
-      <li>Para cada uno de los cuatro pilares de seguridad de procesos de acuerdo a RBPS, se desarrolló una pestaña con su nombre, que son:
-        <ul>
-          <li><b>COMPROMISO</b></li>
-          <li><b>ENTENDIMIENTO</b></li>
-          <li><b>GESTIÓN</b></li>
-          <li><b>APRENDER DE LA EXPERIENCIA</b></li>
-        </ul>
-      </li>
-      <li>En cada una de las pestañas mencionadas se han colocado los elementos propuestos en el modelo RBPS, y a cada uno de los elementos se les han propuesto unos factores críticos de éxito, los cuales se presentan en tres niveles de desarrollo que son: <b>BAJO</b>, <b>MEDIO</b> y <b>ALTO</b>.</li>
-      <li>En la casilla de <b>CALIFICACIÓN</b> debes colocar números enteros del 1 al 10 para calificar los niveles de desarrollo encontrados, así:
-        <div style="margin-left:14px">1–3: <b>BAJO</b> &nbsp; | &nbsp; 4–7: <b>MEDIO</b> &nbsp; | &nbsp; 8–10: <b>ALTO</b></div>
-      </li>
-      <li>En la pestaña resultados se pueden observar los desarrollos de cada uno de los elementos y en la parte inferior se totaliza la calificación del sistema de acuerdo a esta herramienta.</li>
+      <li>Cuatro pilares (pestañas): <b>COMPROMISO</b>, <b>ENTENDIMIENTO</b>, <b>GESTIÓN</b>, <b>APRENDER DE LA EXPERIENCIA</b>.</li>
+      <li>Cada elemento tiene factores críticos en tres niveles: <b>BAJO</b>, <b>MEDIO</b>, <b>ALTO</b>.</li>
+      <li>Calificación: números enteros 1–10 → 1–3 <b>BAJO</b> | 4–7 <b>MEDIO</b> | 8–10 <b>ALTO</b>.</li>
+      <li>La pestaña de resultados consolida los desarrollos y el total del sistema.</li>
     </ul>
-    <p><b>NOTA:</b> La escala de valoración es lineal, en esta primera versión de la herramienta no se hizo ponderación para la calificación.</p>
-    <p class="small">Todos los derechos reservados. No se permite la reproducción total o parcial de ninguna parte de esta obra, ni su comercialización ni publicación en cualquier medio, sin el permiso previo y escrito de Seguros de Vida Suramericana S.A. © Propiedad Intelectual de ARL SURA, abril de 2018.</p>
-  </div>
+    <p><b>NOTA:</b> escala lineal sin ponderación (versión inicial).</p>
+    <p class="small">© ARL SURA 2018. Derechos reservados.</p>
+  </details>
 
+  <!-- Meta (3 filas) -->
   <div class="meta">
-    <div><label>Nombre</label><input id="nombre" required></div>
-    <div><label>Apellido</label><input id="apellido" required></div>
-    <div><label>Área / Equipo</label><input id="area" placeholder="Operaciones, Mantenimiento, HSE…" required></div>
-    <!-- SIN campo de fecha editable -->
-    <div><label>Responder por</label><select id="modo"><option>Usuario</option><option>Área</option></select></div>
-    <div><label>Pilar</label><select id="pilar"></select></div>
-    <div><label>Elemento</label><select id="elemento"></select></div>
-    <div><label>Componente</label><select id="componente"></select></div>
+    <!-- Fila 1 -->
+    <div class="g-nombre"><label>Nombre</label><input id="nombre" required></div>
+    <div class="g-apellido"><label>Apellido</label><input id="apellido" required></div>
+
+    <!-- Fila 2 -->
+    <div class="g-area"><label>Área / Equipo</label><input id="area" placeholder="Operaciones, Mantenimiento, HSE…" required></div>
+    <div class="g-modo"><label>Responder por</label>
+      <select id="modo"><option>Usuario</option><option>Área</option></select>
+    </div>
+
+    <!-- Fila 3 -->
+    <div class="g-pilar"><label>Pilar</label><select id="pilar"></select></div>
+    <div class="g-elemento"><label>Elemento</label><select id="elemento"></select></div>
+    <div class="g-componente"><label>Componente</label><select id="componente"></select></div>
   </div>
 
   <!-- Progreso -->
   <div class="progress-wrap">
-    <div class="progress"><div class="bar" id="bar"></div></div>
+    <progress id="prog" value="0" max="100"></progress>
     <div class="pct" id="pct">0%</div>
   </div>
 
@@ -130,22 +116,14 @@
 
   <table id="tabla">
     <colgroup>
-      <col style="width:14%">
-      <col style="width:34%">
-      <col style="width:18%">
-      <col style="width:8%">
-      <col style="width:12%">
-      <col style="width:14%">
+      <col style="width:14%"><col style="width:34%"><col style="width:18%">
+      <col style="width:8%"><col style="width:12%"><col style="width:14%">
     </colgroup>
     <thead>
-      <tr>
-        <th>QuestionID</th>
-        <th>Pregunta</th>
-        <th>Guía de nivel</th>
-        <th>Calif. (1–10)</th>
-        <th>Registro</th>
-        <th>Observaciones</th>
-      </tr>
+    <tr>
+      <th>QuestionID</th><th>Pregunta</th><th>Guía de nivel</th>
+      <th>Calif. (1–10)</th><th>Registro</th><th>Observaciones</th>
+    </tr>
     </thead>
     <tbody></tbody>
   </table>
@@ -153,12 +131,11 @@
 
 <script>
 /* =================== CONFIG =================== */
-const JSON_URL = "preguntas.json?v=1";
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzeyrl7uh88IeH7uS01LtemFRVgIAyc5kySvSlgZjNHHlqL5rB3t9stuqjWWU8Dogy8/exec";
+const JSON_URL = "preguntas.json?v=1";  // tu JSON ya generado
+const ENDPOINT = "PEGAR_URL_APPSSCRIPT_AQUI"; // <-- pon tu /exec
 
 /* =================== ESTADO =================== */
-let DATA = null;
-let TOTAL = 0;
+let DATA = null; // {Pilar:{Elemento:[{id,componente,pregunta,niveles},...]}}
 const slug = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
 
 /* =================== CARGA DE JSON =================== */
@@ -179,7 +156,8 @@ fetch(JSON_URL).then(r=>r.json()).then(d=>{
     const p = document.getElementById('pilar').value;
     const e = document.getElementById('elemento').value;
     const comps = [...new Set((DATA[p]?.[e]||[]).map(q=>q.componente))];
-    document.getElementById('componente').innerHTML = '<option value="">(Todos)</option>' + comps.map(c=>`<option>${c}</option>`).join('');
+    document.getElementById('componente').innerHTML =
+      '<option value="">(Todos)</option>' + comps.map(c=>`<option>${c}</option>`).join('');
     saveMeta();
   });
   document.getElementById('componente').addEventListener('change', saveMeta);
@@ -198,15 +176,20 @@ document.getElementById('filtrar').addEventListener('click', ()=>{
   else if (p && !e) items = byComp(Object.values(DATA[p]||{}).flat());
   else items = byComp(Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat()));
 
-  // Orden por número final del QuestionID
-  const num = qid => { const t = String(qid||'').split('-').pop(); const n = parseInt(t,10); return isNaN(n)? Infinity : n; };
+  // Orden por sufijo numérico del ID
+  const num = qid => {
+    const t = String(qid||'').split('-').pop();
+    const n = parseInt(t,10);
+    return isNaN(n)? Infinity : n;
+  };
   items.sort((a,b)=> num(a.id) - num(b.id));
 
   renderRows(items, p || 'Todos', e || 'Todos', c || '');
   restoreAnswers();
+  updateProgress();  // reset/actualiza barra
 });
 
-/* =================== RENDER DE TABLA =================== */
+/* =================== RENDER TABLA =================== */
 function renderRows(items, pilar, elemento, componente){
   const tb = document.querySelector('#tabla tbody');
   tb.innerHTML = '';
@@ -223,33 +206,39 @@ function renderRows(items, pilar, elemento, componente){
       </td>
       <td>${x.pregunta}</td>
       <td class="small"><details><summary>► Ver guía</summary>${guia||'Sin guía'}</details></td>
-      <td><input type="number" min="1" max="10" data-k="calificacion" data-id="${x.id}"></td>
+      <td>
+        <input type="number" min="1" max="10" required
+               data-k="calificacion" data-id="${x.id}" placeholder="1–10">
+      </td>
       <td><input type="text" placeholder="Código doc, URL, ruta…" data-k="registro" data-id="${x.id}"></td>
-      <td><textarea rows="2" data-k="observaciones" data-id="${x.id}"></textarea></td>
+      <td><textarea rows="2" placeholder="Comentarios…" data-k="observaciones" data-id="${x.id}"></textarea></td>
     `;
     tb.appendChild(tr);
   });
 
-  // contar y setear progreso
-  TOTAL = items.length;
-  updateProgress();
-
-  // autosave + progreso en input
+  // listeners: autosave + progreso + limpiar errores al teclear
   document.querySelectorAll('[data-id]').forEach(n=>{
     n.addEventListener('input', ()=>{
+      n.classList.remove('error');
       scheduleAutosave();
       updateProgress();
-      if (n.dataset.k === 'calificacion') n.classList.remove('error');
     });
   });
 }
 
 /* =================== PROGRESO =================== */
 function updateProgress(){
-  const filled = Array.from(document.querySelectorAll('input[data-k="calificacion"]')).filter(i=>i.value).length;
-  const pct = TOTAL ? Math.round((filled / TOTAL) * 100) : 0;
-  document.getElementById('bar').style.width = pct + '%';
-  document.getElementById('pct').textContent = pct + '%';
+  const inputs = Array.from(document.querySelectorAll('input[data-k="calificacion"]'));
+  const total = inputs.length || 1;
+  const ok = inputs.filter(i => !!validScore(i.value)).length;
+  const pct = Math.round(ok * 100 / total);
+  const prog = document.getElementById('prog');
+  const pctEl = document.getElementById('pct');
+  prog.value = pct; pctEl.textContent = pct + '%';
+}
+function validScore(v){
+  const n = Number(v);
+  return Number.isInteger(n) && n>=1 && n<=10;
 }
 
 /* =================== RECOLECCIÓN =================== */
@@ -263,7 +252,7 @@ function collectRows(){
   const area = document.getElementById('area').value.trim();
   const modo = document.getElementById('modo').value;
 
-  // Toma texto visible si value viene vacío
+  // Tomar texto visible si no hay value
   const pSel = document.getElementById('pilar');
   const eSel = document.getElementById('elemento');
   const cSel = document.getElementById('componente');
@@ -278,32 +267,31 @@ function collectRows(){
     map[id] = map[id] || { calificacion:null, registro:"", observaciones:"" };
     map[id][k] = n.value;
   });
-  const rows = Object.entries(map)
-    .filter(([,v])=>v.calificacion) // solo envía filas con calificación
-    .map(([id,v])=>({
-      submissionId: makeSubmissionId(nombre, apellido, area),
-      nombre, apellido, area,
-      fecha: "",                 // la fecha real la pone el backend
-      modo,
-      pilar, elemento, componente,
-      pregunta_id: id,
-      calificacion: Number(v.calificacion),
-      registro: v.registro||"",
-      observaciones: v.observaciones||""
-    }));
+
+  const rows = Object.entries(map).map(([id,v])=>({
+    submissionId: makeSubmissionId(nombre, apellido, area),
+    nombre, apellido, area, modo,
+    pilar, elemento, componente,
+    pregunta_id: id,
+    calificacion: v.calificacion? Number(v.calificacion) : null,
+    registro: v.registro || "",
+    observaciones: v.observaciones || ""
+  }));
   return rows;
 }
 
 /* =================== VALIDACIÓN ANTES DE ENVIAR =================== */
-function validateAllAnswered(){
-  // Todas las preguntas visibles deben tener calificación
+function validateBeforeSend(){
   const califs = Array.from(document.querySelectorAll('input[data-k="calificacion"]'));
-  califs.forEach(i=>i.classList.remove('error'));
-  const missing = califs.filter(i=>!i.value);
-  if (missing.length){
-    missing.forEach(i=>i.classList.add('error'));
-    missing[0].scrollIntoView({behavior:'smooth', block:'center'});
-    setStatus(`Faltan ${missing.length} calificaciones. Complétalas antes de enviar.`, true);
+  let firstBad = null;
+  califs.forEach(i=>{
+    const ok = validScore(i.value);
+    if(!ok && !firstBad) firstBad = i;
+    i.classList.toggle('error', !ok);
+  });
+  if(firstBad){
+    firstBad.scrollIntoView({behavior:'smooth',block:'center'});
+    setStatus('Faltan calificaciones (1–10). Revisa los campos en rojo.', true);
     return false;
   }
   return true;
@@ -311,10 +299,10 @@ function validateAllAnswered(){
 
 /* =================== ENVÍO =================== */
 document.getElementById('enviar').addEventListener('click', async()=>{
-  if(!validateAllAnswered()) return;
+  if(!validateBeforeSend()) return;
 
   const rows = collectRows();
-  if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
+  if(!rows.length){ setStatus('No hay preguntas cargadas.', true); return; }
   if(!ENDPOINT || ENDPOINT.includes('PEGAR_URL_APPSSCRIPT_AQUI')){
     setStatus('Configura ENDPOINT (Apps Script) o usa Descargar CSV.', true); return;
   }
@@ -326,21 +314,24 @@ document.getElementById('enviar').addEventListener('click', async()=>{
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({rows})
     });
-    setStatus('✅ Formulario enviado. Revisa el XLSX generado y el maestro.');
+    setStatus('✅ Formulario enviado.');
     clearAutosave();
   }catch(err){
     setStatus('❌ Error al enviar', true);
   }
 });
 
-/* =================== CSV LOCAL =================== */
+/* =================== CSV LOCAL (backup) =================== */
 document.getElementById('descargar').addEventListener('click', ()=>{
   const rows = collectRows();
-  if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
+  if(!rows.length){ setStatus('No hay preguntas cargadas.', true); return; }
   const headers = Object.keys(rows[0]);
-  const csv = [headers.join(',')].concat(rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))).join('\n');
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'respuestas_psm.csv'; a.click();
+  const csv = [headers.join(',')].concat(
+    rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))
+  ).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8;'}));
+  a.download = 'respuestas_psm.csv'; a.click();
 });
 function csvEsc(v){ let s = String(v==null?'':v); if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"'; return s; }
 function setStatus(t, err=false){ const el = document.getElementById('status'); el.textContent = t; el.style.color = err? '#b00020':'#0a7a0a'; }
@@ -367,20 +358,12 @@ function scheduleAutosave(){
 });
 function persist(){
   const key = lsKey();
-  const payload = {
-    meta: {
-      nombre: document.getElementById('nombre').value,
-      apellido: document.getElementById('apellido').value,
-      area: document.getElementById('area').value,
-      modo: document.getElementById('modo').value,
-      pilar: document.getElementById('pilar').value,
-      elemento: document.getElementById('elemento').value,
-      componente: document.getElementById('componente').value
-    },
-    answers: {}
-  };
+  const payload = { meta:{}, answers:{} };
+  ['nombre','apellido','area','modo','pilar','elemento','componente'].forEach(k=>{
+    payload.meta[k] = document.getElementById(k).value;
+  });
   document.querySelectorAll('[data-id]').forEach(n=>{
-    const id = n.dataset.id, k = n.dataset.k;
+    const id=n.dataset.id, k=n.dataset.k;
     payload.answers[id] = payload.answers[id] || {};
     payload.answers[id][k] = n.value;
   });
@@ -388,8 +371,7 @@ function persist(){
   document.getElementById('autosave').textContent = 'Borrador guardado ✓';
 }
 function restoreAnswers(){
-  const key = lsKey();
-  const raw = localStorage.getItem(key);
+  const raw = localStorage.getItem(lsKey());
   if(!raw) return;
   try{
     const data = JSON.parse(raw);
@@ -405,7 +387,6 @@ function restoreAnswers(){
       }
     }
     document.getElementById('autosave').textContent = 'Borrador restaurado';
-    updateProgress();
   }catch(_){}
 }
 function clearAutosave(){ localStorage.removeItem(lsKey()); document.getElementById('autosave').textContent = ''; }
