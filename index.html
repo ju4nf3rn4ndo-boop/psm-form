@@ -7,12 +7,44 @@
   <style>
     :root{--b:#e5e7eb;--bg:#fafafa}
     body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;padding:24px}
-    .container{max-width:1200px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
+
+    /* ↑↑ Ajuste de ancho para que respire más */
+    .container{
+      max-width:1360px;                 /* antes 1200px */
+      margin:0 auto;
+      background:white;
+      border:1px solid var(--b);
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,.06);
+      padding:20px
+    }
     h1{margin:0 0 12px 0}
-    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+
+    /* ↑↑ Grid robusto con ancho mínimo por celda */
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(220px,1fr)); /* evita solapamientos */
+      gap:14px;
+      margin-bottom:16px
+    }
+    .meta > div{ min-width:0 } /* permite que los inputs no desborden la celda */
+
     label{font-weight:600;font-size:14px}
-    input,select,textarea{width:100%;padding:10px;border:1px solid var(--b);border-radius:8px;background:white}
+
+    /* ↑↑ Controles consistentes y sin overflow */
+    input,select,textarea{
+      width:100%;
+      box-sizing:border-box;            /* clave: evita que el padding rompa el grid */
+      padding:10px;
+      border:1px solid var(--b);
+      border-radius:8px;
+      background:white;
+      min-height:42px;
+      line-height:1.25;
+    }
+    input[type="date"]{ min-height:42px }
     textarea{resize:vertical}
+
     .toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 16px 0;flex-wrap:wrap}
     button{padding:10px 14px;border:1px solid var(--b);border-radius:8px;background:#111827;color:white;font-weight:600;cursor:pointer}
     button.secondary{background:white;color:#111827}
@@ -42,12 +74,23 @@
     th, td{ border:1px solid var(--b); padding:10px; vertical-align:top; word-wrap:break-word }
     thead th{position:sticky;top:0;background:#111827;color:white;z-index:1}
     input[type="number"], input[type="text"], textarea{
-      display:block; width:100%; max-width:100%; box-sizing:border-box; margin:0; line-height:1.25;
+      display:block; width:100%; max-width:100%; margin:0;
     }
     td:nth-child(4) input[type="number"]{ height:38px; }
     td:nth-child(5) input[type="text"]{ min-height:38px; }
     td:nth-child(6) textarea{ min-height:60px; }
     td{ overflow:hidden; }
+
+    /* --- Breakpoints para que el grid sea fluido --- */
+    @media (max-width:1200px){
+      .meta{ grid-template-columns:repeat(3, minmax(220px,1fr)) }
+    }
+    @media (max-width:900px){
+      .meta{ grid-template-columns:repeat(2, minmax(220px,1fr)) }
+    }
+    @media (max-width:600px){
+      .meta{ grid-template-columns:1fr }
+    }
   </style>
 </head>
 <body>
@@ -217,7 +260,6 @@ function collectRows(){
   const fecha = document.getElementById('fecha').value || new Date().toISOString().slice(0,10);
   const modo = document.getElementById('modo').value;
 
-  // Toma texto visible si value viene vacío
   const pSel = document.getElementById('pilar');
   const eSel = document.getElementById('elemento');
   const cSel = document.getElementById('componente');
