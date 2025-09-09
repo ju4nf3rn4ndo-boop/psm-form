@@ -6,38 +6,19 @@
   <title>Encuesta PSM</title>
   <style>
     :root{--b:#e5e7eb;--bg:#fafafa}
-    *{box-sizing:border-box}
     body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;padding:24px}
-    .container{max-width:1500px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
-
+    .container{max-width:1200px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
     h1{margin:0 0 12px 0}
+    label{font-weight:600;font-size:14px}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--b);border-radius:8px;background:white;box-sizing:border-box}
+    textarea{resize:vertical}
 
-    /* Instrucciones */
-    .guide{
-      border:1px solid var(--b);background:#f9fafb;border-radius:10px;
-      padding:14px;margin:10px 0 16px 0;line-height:1.4
-    }
-    .guide summary{cursor:pointer;font-weight:700}
-    .guide ul{margin:6px 0 12px 18px}
-
-    /* Grid meta en 3 columnas + posiciones */
-    .meta{
-      display:grid;grid-template-columns:repeat(3, minmax(220px,1fr));gap:12px;margin-bottom:10px
-    }
-    label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
-    input,select,textarea{width:100%;padding:10px;border:1px solid var(--b);border-radius:8px;background:white}
-
-    .g-nombre{grid-column:1}
-    .g-apellido{grid-column:2}
-    .g-area{grid-column:1}
-    .g-modo{grid-column:2}
-    .g-pilar{grid-column:1}
-    .g-elemento{grid-column:2}
-    .g-componente{grid-column:3}
-
-    @media (max-width: 900px){
-      .meta{grid-template-columns:1fr}
-      .meta > div{grid-column:1!important}
+    /* layout meta */
+    .meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+    .meta-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+    @media (min-width:900px){
+      .meta{grid-template-columns:2fr 2fr}
+      .meta-2{grid-template-columns:2fr 1fr}
     }
 
     .toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 12px 0;flex-wrap:wrap}
@@ -45,23 +26,27 @@
     button.secondary{background:white;color:#111827}
     .status{margin-left:8px}
     .small{font-size:12px;color:#374151}
+    details{margin-top:4px}
+    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
     .right{margin-left:auto}
 
-    /* Progreso */
-    .progress-wrap{display:flex;align-items:center;gap:10px;margin:8px 0}
-    progress{width:100%;height:8px}
-    .pct{width:42px;text-align:right;font-variant-numeric:tabular-nums}
+    /* Instrucciones */
+    .guide{border:1px solid var(--b);background:#f9fafb;border-radius:10px;padding:14px;margin:10px 0 14px 0;max-height:260px;overflow:auto;line-height:1.4}
+    .guide h3{margin:6px 0 8px 0;} .guide ul{margin:6px 0 12px 18px;} .guide li{margin:3px 0;}
 
-    /* Tabla preguntas */
-    table{table-layout:fixed;border-collapse:collapse;width:100%}
-    th,td{border:1px solid var(--b);padding:10px;vertical-align:top;word-wrap:break-word}
-    thead th{position:sticky;top:0;background:#111827;color:white;z-index:2}
-    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin:4px 6px 0 0}
-    input[type="number"],input[type="text"],textarea{display:block;width:100%;max-width:100%;line-height:1.25}
-    td:nth-child(4) input[type="number"]{height:38px}
-    td:nth-child(5) input[type="text"]{min-height:38px}
-    td:nth-child(6) textarea{min-height:60px}
-    .error{outline:2px solid #b00020;border-color:#b00020}
+    /* progreso */
+    .progress{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden}
+    .bar{height:100%;width:0%;background:#0ea5e9;transition:width .2s}
+
+    /* tabla */
+    table{ table-layout:fixed; border-collapse:collapse; width:100% }
+    th, td{ border:1px solid var(--b); padding:10px; vertical-align:top; word-wrap:break-word }
+    thead th{position:sticky;top:0;background:#111827;color:white;z-index:1}
+    input[type="number"], input[type="text"], textarea{display:block;width:100%;max-width:100%;box-sizing:border-box;margin:0;line-height:1.25}
+    td:nth-child(4) input[type="number"]{ height:38px; }
+    td:nth-child(5) input[type="text"]{ min-height:38px; }
+    td:nth-child(6) textarea{ min-height:60px; }
+    td{ overflow:hidden; }
   </style>
 </head>
 <body>
@@ -69,42 +54,39 @@
   <h1>Encuesta PSM</h1>
 
   <!-- Instrucciones -->
-  <details class="guide" open>
-    <summary>Instrucciones</summary>
+  <div class="guide">
+    <h3>Instrucciones</h3>
     <p>En la utilización de la herramienta para la construcción de una línea base de seguridad de procesos, basada en RBPS (Risk Based Process Safety), ten en cuenta:</p>
     <ul>
-      <li>Cuatro pilares (pestañas): <b>COMPROMISO</b>, <b>ENTENDIMIENTO</b>, <b>GESTIÓN</b>, <b>APRENDER DE LA EXPERIENCIA</b>.</li>
-      <li>Cada elemento tiene factores críticos en tres niveles: <b>BAJO</b>, <b>MEDIO</b>, <b>ALTO</b>.</li>
-      <li>Calificación: números enteros 1–10 → 1–3 <b>BAJO</b> | 4–7 <b>MEDIO</b> | 8–10 <b>ALTO</b>.</li>
-      <li>Al final del cuestionario se envían los resultados y se consolidan los desarrollos y el total del sistema.</li>
+      <li>Pilares RBPS: <b>COMPROMISO, ENTENDIMIENTO, GESTIÓN, APRENDER DE LA EXPERIENCIA</b>.</li>
+      <li>Cada elemento se califica con factores críticos de éxito en tres niveles: <b>BAJO</b>, <b>MEDIO</b>, <b>ALTO</b>.</li>
+      <li><b>Calificación</b> usa enteros 1–10:
+        <div style="margin-left:14px">1–3: <b>BAJO</b> | 4–7: <b>MEDIO</b> | 8–10: <b>ALTO</b></div>
+      </li>
+      <li>En “Resultados” se consolida el avance por elemento y el total del sistema.</li>
     </ul>
-    <p><b>NOTA:</b> escala lineal sin ponderación (versión inicial).</p>
-    <p class="small">© ARL SURA 2018. Derechos reservados.</p>
-  </details>
+    <p><b>NOTA:</b> Escala lineal (sin ponderación) en esta versión.</p>
+    <p class="small">© ARL SURA, abril 2018. Derechos reservados.</p>
+  </div>
 
-  <!-- Meta (3 filas) -->
+  <!-- Meta mínimos -->
   <div class="meta">
-    <!-- Fila 1 -->
-    <div class="g-nombre"><label>Nombre</label><input id="nombre" required></div>
-    <div class="g-apellido"><label>Apellido</label><input id="apellido" required></div>
-
-    <!-- Fila 2 -->
-    <div class="g-area"><label>Área / Equipo</label><input id="area" placeholder="Operaciones, Mantenimiento, HSE…" required></div>
-    <div class="g-modo"><label>Responder por</label>
-      <select id="modo"><option>Usuario</option><option>Área</option></select>
+    <div><label>Nombre</label><input id="nombre" required></div>
+    <div><label>Apellido</label><input id="apellido" required></div>
+  </div>
+  <div class="meta-2">
+    <div><label>Área / Equipo</label><input id="area" placeholder="Operaciones, Mantenimiento, HSE…" required></div>
+    <div><label>Responder por</label>
+      <select id="modo">
+        <option>Usuario</option>
+        <option>Área</option>
+      </select>
     </div>
-
-    <!-- Fila 3 -->
-    <div class="g-pilar"><label>Pilar</label><select id="pilar"></select></div>
-    <div class="g-elemento"><label>Elemento</label><select id="elemento"></select></div>
-    <div class="g-componente"><label>Componente</label><select id="componente"></select></div>
   </div>
 
   <!-- Progreso -->
-  <div class="progress-wrap">
-    <progress id="prog" value="0" max="100"></progress>
-    <div class="pct" id="pct">0%</div>
-  </div>
+  <div class="progress" title="Progreso de calificaciones"><div class="bar" id="bar"></div></div>
+  <div class="small" id="pct" style="text-align:right;margin-top:4px;">0%</div>
 
   <div class="toolbar">
     <button id="filtrar">Cargar preguntas</button>
@@ -116,83 +98,66 @@
 
   <table id="tabla">
     <colgroup>
-      <col style="width:14%"><col style="width:34%"><col style="width:18%">
-      <col style="width:8%"><col style="width:12%"><col style="width:14%">
+      <col style="width:14%">
+      <col style="width:34%">
+      <col style="width:18%">
+      <col style="width:8%">
+      <col style="width:12%">
+      <col style="width:14%">
     </colgroup>
     <thead>
-    <tr>
-      <th>QuestionID</th><th>Pregunta</th><th>Guía de nivel</th>
-      <th>Calif. (1–10)</th><th>Registro</th><th>Observaciones</th>
-    </tr>
+      <tr>
+        <th>QuestionID</th>
+        <th>Pregunta</th>
+        <th>Guía de nivel</th>
+        <th>Calif. (1–10)</th>
+        <th>Registro</th>
+        <th>Observaciones</th>
+      </tr>
     </thead>
     <tbody></tbody>
   </table>
 </div>
 
 <script>
-/* =================== CONFIG =================== */
-const JSON_URL = "preguntas.json?v=1";  // tu JSON ya generado
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzeyrl7uh88IeH7uS01LtemFRVgIAyc5kySvSlgZjNHHlqL5rB3t9stuqjWWU8Dogy8/exec"; //exec
+/* ============== CONFIG ============== */
+const JSON_URL = "preguntas.json?v=1";
+const ENDPOINT = "PEGAR_AQUI_TU_URL_EXEC_DE_APPS_SCRIPT"; // <-- tu /exec
 
-/* =================== ESTADO =================== */
+/* ============== ESTADO ============== */
 let DATA = null; // {Pilar:{Elemento:[{id,componente,pregunta,niveles},...]}}
+let TOTAL = 0;
 const slug = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
 
-/* =================== CARGA DE JSON =================== */
-fetch(JSON_URL).then(r=>r.json()).then(d=>{
-  DATA = d;
-  const pSel = document.getElementById('pilar');
-  pSel.innerHTML = '<option value="">(Todos)</option>' + Object.keys(DATA).map(p=>`<option>${p}</option>`).join('');
-  pSel.addEventListener('change', ()=>{
-    const elSel = document.getElementById('elemento');
-    elSel.innerHTML = '<option value="">(Todos)</option>';
-    document.getElementById('componente').innerHTML = '<option value="">(Todos)</option>';
-    if(!pSel.value) return;
-    const elems = Object.keys(DATA[pSel.value]||{});
-    elSel.innerHTML += elems.map(e=>`<option>${e}</option>`).join('');
-    saveMeta();
-  });
-  document.getElementById('elemento').addEventListener('change', ()=>{
-    const p = document.getElementById('pilar').value;
-    const e = document.getElementById('elemento').value;
-    const comps = [...new Set((DATA[p]?.[e]||[]).map(q=>q.componente))];
-    document.getElementById('componente').innerHTML =
-      '<option value="">(Todos)</option>' + comps.map(c=>`<option>${c}</option>`).join('');
-    saveMeta();
-  });
-  document.getElementById('componente').addEventListener('change', saveMeta);
-});
+/* ============== CARGA JSON ============== */
+fetch(JSON_URL).then(r=>r.json()).then(d=>{ DATA = d; });
 
-/* =================== CARGAR / ORDENAR =================== */
+/* ============== LOAD ALL (116) ============== */
 document.getElementById('filtrar').addEventListener('click', ()=>{
-  const p = document.getElementById('pilar').value;
-  const e = document.getElementById('elemento').value;
-  const c = document.getElementById('componente').value;
+  // valida meta
+  const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
+  if (!nombre || !apellido || !area) {
+    setStatus('Completa Nombre, Apellido y Área antes de cargar.', true);
+    return;
+  }
+  if (!DATA) { setStatus('Aún cargando preguntas, intenta de nuevo…', true); return; }
 
-  let items = [];
-  const byComp = arr => c ? arr.filter(x=>x.componente===c) : arr;
-
-  if (p && e) items = byComp(DATA[p]?.[e] || []);
-  else if (p && !e) items = byComp(Object.values(DATA[p]||{}).flat());
-  else items = byComp(Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat()));
-
-  // Orden por sufijo numérico del ID
-  const num = qid => {
-    const t = String(qid||'').split('-').pop();
-    const n = parseInt(t,10);
-    return isNaN(n)? Infinity : n;
-  };
+  // aplana todo y ordena por sufijo numérico del QuestionID
+  let items = Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat());
+  const num = qid => { const t = String(qid||'').split('-').pop(); const n = parseInt(t,10); return isNaN(n)? Infinity : n; };
   items.sort((a,b)=> num(a.id) - num(b.id));
 
-  renderRows(items, p || 'Todos', e || 'Todos', c || '');
-  restoreAnswers();
-  updateProgress();  // reset/actualiza barra
+  renderRows(items);
+  restoreAnswers(); // intenta restaurar borrador del usuario
+  computeProgress();
+  setStatus(`Cargadas ${items.length} preguntas.`);
 });
 
-/* =================== RENDER TABLA =================== */
-function renderRows(items, pilar, elemento, componente){
+/* ============== RENDER TABLA ============== */
+function renderRows(items){
   const tb = document.querySelector('#tabla tbody');
   tb.innerHTML = '';
+  TOTAL = items.length;
   items.forEach(x=>{
     const tr = document.createElement('tr');
     const niveles = x.niveles || {};
@@ -200,65 +165,45 @@ function renderRows(items, pilar, elemento, componente){
     tr.innerHTML = `
       <td>
         <div class="small">${x.id}</div>
-        <div class="pill">${pilar}</div>
-        <div class="pill">${elemento}</div>
-        <div class="pill">${x.componente}</div>
+        <div class="pill">${x.componente || ''}</div>
       </td>
       <td>${x.pregunta}</td>
       <td class="small"><details><summary>► Ver guía</summary>${guia||'Sin guía'}</details></td>
-      <td>
-        <input type="number" min="1" max="10" required
-               data-k="calificacion" data-id="${x.id}" placeholder="1–10">
-      </td>
+      <td><input type="number" min="1" max="10" data-k="calificacion" data-id="${x.id}" required></td>
       <td><input type="text" placeholder="Código doc, URL, ruta…" data-k="registro" data-id="${x.id}"></td>
-      <td><textarea rows="2" placeholder="Comentarios…" data-k="observaciones" data-id="${x.id}"></textarea></td>
+      <td><textarea rows="2" data-k="observaciones" data-id="${x.id}"></textarea></td>
     `;
     tb.appendChild(tr);
   });
 
-  // listeners: autosave + progreso + limpiar errores al teclear
+  // autosave + progreso
   document.querySelectorAll('[data-id]').forEach(n=>{
-    n.addEventListener('input', ()=>{
-      n.classList.remove('error');
-      scheduleAutosave();
-      updateProgress();
-    });
+    n.addEventListener('input', ()=>{ scheduleAutosave(); if(n.dataset.k==='calificacion') computeProgress(); });
   });
 }
 
-/* =================== PROGRESO =================== */
-function updateProgress(){
-  const inputs = Array.from(document.querySelectorAll('input[data-k="calificacion"]'));
-  const total = inputs.length || 1;
-  const ok = inputs.filter(i => !!validScore(i.value)).length;
-  const pct = Math.round(ok * 100 / total);
-  const prog = document.getElementById('prog');
-  const pctEl = document.getElementById('pct');
-  prog.value = pct; pctEl.textContent = pct + '%';
-}
-function validScore(v){
-  const n = Number(v);
-  return Number.isInteger(n) && n>=1 && n<=10;
+/* ============== PROGRESO ============== */
+function computeProgress(){
+  const done = Array.from(document.querySelectorAll('input[data-k="calificacion"]'))
+    .filter(i => i.value && !isNaN(parseInt(i.value,10))).length;
+  const pct = TOTAL ? Math.round((done / TOTAL) * 100) : 0;
+  document.getElementById('bar').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
 }
 
-/* =================== RECOLECCIÓN =================== */
+/* ============== RECOLECCIÓN ============== */
+function val(id){ return document.getElementById(id).value.trim(); }
 function makeSubmissionId(nombre, apellido, area){
   const ts = new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
   return `${slug(apellido)}_${slug(nombre)}_${slug(area)}_${ts}`;
 }
 function collectRows(){
-  const nombre = document.getElementById('nombre').value.trim();
-  const apellido = document.getElementById('apellido').value.trim();
-  const area = document.getElementById('area').value.trim();
+  const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
   const modo = document.getElementById('modo').value;
+  const fecha = new Date().toISOString().slice(0,10); // ya no se pide, se fija
 
-  // Tomar texto visible si no hay value
-  const pSel = document.getElementById('pilar');
-  const eSel = document.getElementById('elemento');
-  const cSel = document.getElementById('componente');
-  const pilar = pSel.value || (pSel.options[pSel.selectedIndex]?.text || '');
-  const elemento = eSel.value || (eSel.options[eSel.selectedIndex]?.text || '');
-  const componente = cSel.value || (cSel.options[cSel.selectedIndex]?.text || '');
+  // al no haber filtros, enviamos campos vacíos/“Todos” (el backend tolera esto)
+  const pilar = 'Todos', elemento = 'Todos', componente = '';
 
   const inputs = Array.from(document.querySelectorAll('[data-id]'));
   const map = {};
@@ -268,43 +213,30 @@ function collectRows(){
     map[id][k] = n.value;
   });
 
-  const rows = Object.entries(map).map(([id,v])=>({
-    submissionId: makeSubmissionId(nombre, apellido, area),
-    nombre, apellido, area, modo,
-    pilar, elemento, componente,
-    pregunta_id: id,
-    calificacion: v.calificacion? Number(v.calificacion) : null,
-    registro: v.registro || "",
-    observaciones: v.observaciones || ""
-  }));
+  // Requerido: calificación; registro/observaciones opcional
+  const rows = Object.entries(map)
+    .filter(([,v])=>v.calificacion) // solo envía las con calificación
+    .map(([id,v])=>({
+      submissionId: makeSubmissionId(nombre, apellido, area),
+      nombre, apellido, area, fecha, modo,
+      pilar, elemento, componente,
+      pregunta_id: id,
+      calificacion: Number(v.calificacion),
+      registro: v.registro||"",
+      observaciones: v.observaciones||""
+    }));
   return rows;
 }
 
-/* =================== VALIDACIÓN ANTES DE ENVIAR =================== */
-function validateBeforeSend(){
-  const califs = Array.from(document.querySelectorAll('input[data-k="calificacion"]'));
-  let firstBad = null;
-  califs.forEach(i=>{
-    const ok = validScore(i.value);
-    if(!ok && !firstBad) firstBad = i;
-    i.classList.toggle('error', !ok);
-  });
-  if(firstBad){
-    firstBad.scrollIntoView({behavior:'smooth',block:'center'});
-    setStatus('Faltan calificaciones (1–10). Revisa los campos en rojo.', true);
-    return false;
-  }
-  return true;
-}
-
-/* =================== ENVÍO =================== */
+/* ============== ENVÍO ============== */
 document.getElementById('enviar').addEventListener('click', async()=>{
-  if(!validateBeforeSend()) return;
+  const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
+  if (!nombre || !apellido || !area) { setStatus('Completa Nombre, Apellido y Área.', true); return; }
 
   const rows = collectRows();
-  if(!rows.length){ setStatus('No hay preguntas cargadas.', true); return; }
-  if(!ENDPOINT || ENDPOINT.includes('PEGAR_URL_APPSSCRIPT_AQUI')){
-    setStatus('Configura ENDPOINT (Apps Script) o usa Descargar CSV.', true); return;
+  if (!rows.length) { setStatus('Debes calificar al menos una pregunta.', true); return; }
+  if (!ENDPOINT || ENDPOINT.includes('PEGAR_AQUI_TU_URL_EXEC_DE_APPS_SCRIPT')) {
+    setStatus('Configura ENDPOINT (Apps Script) o usa CSV.', true); return;
   }
   try{
     setStatus('Enviando…');
@@ -314,37 +246,29 @@ document.getElementById('enviar').addEventListener('click', async()=>{
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({rows})
     });
-    setStatus('✅ Formulario enviado.');
+    setStatus('✅ Formulario enviado. Revisa PSM_Responses y la carpeta de envíos.');
     clearAutosave();
   }catch(err){
     setStatus('❌ Error al enviar', true);
   }
 });
 
-/* =================== CSV LOCAL (backup) =================== */
+/* ============== CSV LOCAL ============== */
 document.getElementById('descargar').addEventListener('click', ()=>{
   const rows = collectRows();
-  if(!rows.length){ setStatus('No hay preguntas cargadas.', true); return; }
+  if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
   const headers = Object.keys(rows[0]);
-  const csv = [headers.join(',')].concat(
-    rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))
-  ).join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8;'}));
-  a.download = 'respuestas_psm.csv'; a.click();
+  const csv = [headers.join(',')].concat(rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'respuestas_psm.csv'; a.click();
 });
 function csvEsc(v){ let s = String(v==null?'':v); if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"'; return s; }
 function setStatus(t, err=false){ const el = document.getElementById('status'); el.textContent = t; el.style.color = err? '#b00020':'#0a7a0a'; }
 
-/* =================== AUTOSAVE =================== */
+/* ============== AUTOSAVE ============== */
 function lsKey(){
-  const nombre = document.getElementById('nombre').value.trim();
-  const apellido = document.getElementById('apellido').value.trim();
-  const area = document.getElementById('area').value.trim();
-  const p = document.getElementById('pilar').value;
-  const e = document.getElementById('elemento').value;
-  const c = document.getElementById('componente').value;
-  return `psm:${slug(apellido)}:${slug(nombre)}:${slug(area)}:${slug(p)}:${slug(e)}:${slug(c)}`;
+  const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
+  return `psm:${slug(apellido)}:${slug(nombre)}:${slug(area)}`;
 }
 let saveTimer=null;
 function scheduleAutosave(){
@@ -352,18 +276,23 @@ function scheduleAutosave(){
   if(saveTimer) clearTimeout(saveTimer);
   saveTimer = setTimeout(persist, 500);
 }
-['nombre','apellido','area','modo','pilar','elemento','componente'].forEach(id=>{
+['nombre','apellido','area','modo'].forEach(id=>{
   const el = document.getElementById(id);
   el && el.addEventListener('input', scheduleAutosave);
 });
 function persist(){
   const key = lsKey();
-  const payload = { meta:{}, answers:{} };
-  ['nombre','apellido','area','modo','pilar','elemento','componente'].forEach(k=>{
-    payload.meta[k] = document.getElementById(k).value;
-  });
+  const payload = {
+    meta: {
+      nombre: val('nombre'),
+      apellido: val('apellido'),
+      area: val('area'),
+      modo: document.getElementById('modo').value
+    },
+    answers: {}
+  };
   document.querySelectorAll('[data-id]').forEach(n=>{
-    const id=n.dataset.id, k=n.dataset.k;
+    const id = n.dataset.id, k = n.dataset.k;
     payload.answers[id] = payload.answers[id] || {};
     payload.answers[id][k] = n.value;
   });
@@ -371,7 +300,8 @@ function persist(){
   document.getElementById('autosave').textContent = 'Borrador guardado ✓';
 }
 function restoreAnswers(){
-  const raw = localStorage.getItem(lsKey());
+  const key = lsKey();
+  const raw = localStorage.getItem(key);
   if(!raw) return;
   try{
     const data = JSON.parse(raw);
