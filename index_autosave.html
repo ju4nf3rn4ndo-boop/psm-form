@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Encuesta PSM</title>
+  <style>
+    :root{--b:#e5e7eb;--bg:#fafafa}
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;padding:24px}
+    .container{max-width:1200px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
+    h1{margin:0 0 12px 0}
+    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+    label{font-weight:600;font-size:14px}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--b);border-radius:8px;background:white}
+    textarea{resize:vertical}
+    .toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 16px 0;flex-wrap:wrap}
+    button{padding:10px 14px;border:1px solid var(--b);border-radius:8px;background:#111827;color:white;font-weight:600;cursor:pointer}
+    button.secondary{background:white;color:#111827}
+    .status{margin-left:8px}
+    table{width:100%;border-collapse:collapse}
+    thead th{position:sticky;top:0;background:#111827;color:white;padding:8px;border:1px solid var(--b);z-index:1}
+    tbody td{border:1px solid var(--b);padding:8px;vertical-align:top}
+    .small{font-size:12px;color:#374151}
+    details{margin-top:4px}
+    .pill{display:inline-block;background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:12px;margin-left:6px}
+    .right{margin-left:auto}
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Encuesta PSM</h1>
+  <div id="intro" class="small" style="margin-bottom:10px;"></div>
+
+  <div class="meta">
+    <div><label>Nombre</label><input id="nombre" required></div>
+    <div><label>Apellido</label><input id="apellido" required></div>
+    <div><label>Área / Equipo</label><input id="area" placeholder="Operaciones, Mantenimiento, HSE…" required></div>
+    <div><label>Fecha</label><input id="fecha" type="date"></div>
+    <div><label>Responder por</label><select id="modo"><option>Usuario</option><option>Área</option></select></div>
+    <div><label>Pilar</label><select id="pilar"></select></div>
+    <div><label>Elemento</label><select id="elemento"></select></div>
+    <div><label>Componente</label><select id="componente"></select></div>
+  </div>
+
+  <div class="toolbar">
+    <button id="filtrar">Cargar preguntas</button>
+    <button id="enviar">Enviar & generar plantilla XLSX</button>
+    <button id="descargar" class="secondary">Descargar CSV local</button>
+    <div class="right small" id="autosave"></div>
+    <span class="status" id="status"></span>
+  </div>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th style="width:14%">QuestionID</th>
+        <th style="width:34%">Pregunta</th>
+        <th style="width:18%">Guía de nivel</th>
+        <th style="width:8%">Calif. (1–10)</th>
+        <th style="width:12%">Registro</th>
+        <th style="width:14%">Observaciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+const JSON_URL = "preguntas.json";
+const ENDPOINT = "PEGAR_URL_APPSSCRIPT_AQUI"; // Apps Script opcional
+const INTRO_TXT = ""; // si quieres inyectar INSTRUCCIONES!B7 aquí
+
+let DATA = null; // {Pilar:{Elemento:[...]}} con componente por item
+
+document.getElementById('intro').textContent = INTRO_TXT ||
+  "Diligencia según pilar/elemento/componente. Ingresa calificación, evidencia y observaciones. La guía describe los niveles.";
+
+// ---------- Carga de preguntas ----------
+fetch(JSON_URL).then(r=>r.json()).then(d=>{
+  DATA = d;
+  // cargar pilares
+  const pSel = document.getElementById('pilar');
+  pSel.innerHTML = '<option value="">Selecciona…</option>' + Object.keys(DATA).map(p=>`<option>${p}</option>`).join('');
+  pSel.addEventListener('change', ()=>{
+    const elSel = document.getElementById('elemento');
+    elSel.innerHTML = '<option value="">Selecciona…</option>';
+    document.getElementById('componente').innerHTML = '<option value="">Todos</option>';
+    if(!pSel.value) return;
+    const elems = Object.keys(DATA[pSel.value]||{});
+    elSel.innerHTML += elems.map(e=>`<option>${e}</option>`).join('');
+    saveMeta();
+  });
+  document.getElementById('elemento').addEventListener('change', ()=>{
+    const comps = [...new Set((DATA[document.getElementById('pilar').value]?.[document.getElementById('elemento').value]||[]).map(q=>q.componente))];
+    document.getElementById('componente').innerHTML = '<option value="">Todos</option>' + comps.map(c=>`<option>${c}</option>`).join('');
+    saveMeta();
+  });
+  document.getElementById('componente').addEventListener('change', saveMeta);
+});
+
+document.getElementById('filtrar').addEventListener('click', ()=>{
+  const p = document.getElementById('pilar').value;
+  const e = document.getElementById('elemento').value;
+  const c = document.getElementById('componente').value;
+  if(!p || !e){ setStatus('Selecciona Pilar y Elemento', true); return; }
+  const items = (DATA[p]?.[e]||[]).filter(x=>!c || x.componente===c);
+  renderRows(items, p, e, c);
+  restoreAnswers(); // si hay cache, pintarlas
+});
+
+// ---------- Render de tabla ----------
+function renderRows(items, pilar, elemento, componente){
+  const tb = document.querySelector('#tabla tbody');
+  tb.innerHTML = '';
+  items.forEach(x=>{
+    const tr = document.createElement('tr');
+    const niveles = x.niveles || {};
+    const guia = Object.entries(niveles).map(([r,txt])=>`<div><b>${r}</b>: ${txt}</div>`).join('');
+    tr.innerHTML = `
+      <td><span class="small">${x.id}</span><div class="pill">${pilar}</div><div class="pill">${elemento}</div><div class="pill">${x.componente}</div></td>
+      <td>${x.pregunta}</td>
+      <td class="small"><details><summary>Ver guía</summary>${guia||'Sin guía'}</details></td>
+      <td><input type="number" min="1" max="10" data-k="calificacion" data-id="${x.id}"></td>
+      <td><input type="text" placeholder="Código doc, URL, ruta…" data-k="registro" data-id="${x.id}"></td>
+      <td><textarea rows="2" data-k="observaciones" data-id="${x.id}"></textarea></td>
+    `;
+    tb.appendChild(tr);
+  });
+
+  // Escuchar cambios para autosave
+  document.querySelectorAll('[data-id]').forEach(n=>{
+    n.addEventListener('input', scheduleAutosave);
+  });
+}
+
+// ---------- Recolección ----------
+function collectRows(){
+  const nombre = document.getElementById('nombre').value.trim();
+  const apellido = document.getElementById('apellido').value.trim();
+  const area = document.getElementById('area').value.trim();
+  const fecha = document.getElementById('fecha').value || new Date().toISOString().slice(0,10);
+  const modo = document.getElementById('modo').value;
+  const pilar = document.getElementById('pilar').value;
+  const elemento = document.getElementById('elemento').value;
+  const componente = document.getElementById('componente').value;
+
+  const inputs = Array.from(document.querySelectorAll('[data-id]'));
+  const map = {}; // id -> obj
+  inputs.forEach(n=>{
+    const id = n.dataset.id;
+    const k = n.dataset.k;
+    map[id] = map[id] || { calificacion:null, registro:"", observaciones:"" };
+    map[id][k] = n.value;
+  });
+  const rows = Object.entries(map).filter(([,v])=>v.calificacion).map(([id,v])=>({
+    submissionId: makeSubmissionId(nombre, apellido, area),
+    nombre, apellido, area, fecha, modo,
+    pilar, elemento, componente,
+    pregunta_id: id,
+    calificacion: Number(v.calificacion),
+    registro: v.registro||"",
+    observaciones: v.observaciones||""
+  }));
+  return rows;
+}
+
+function makeSubmissionId(nombre, apellido, area){
+  const t = new Date();
+  const ts = t.toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
+  return `${slug(apellido)}_${slug(nombre)}_${slug(area)}_${ts}`;
+}
+function slug(s){ return (s||'').toString().trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); }
+
+// ---------- Envío ----------
+document.getElementById('enviar').addEventListener('click', async()=>{
+  const rows = collectRows();
+  if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
+  if(!ENDPOINT || ENDPOINT.includes('PEGAR_URL_APPSSCRIPT_AQUI')){ setStatus('Configura ENDPOINT (Apps Script) o usa Descargar CSV.', true); return; }
+  try{
+    setStatus('Enviando…');
+    const res = await fetch(ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({rows}) });
+    const data = await res.json().catch(()=>({ok:true}));
+    setStatus(data.ok ? `✅ Enviado. Archivo: ${data.fileUrl||'—'}` : '❌ Error de servidor', !data.ok);
+    clearAutosave();
+  }catch(err){
+    setStatus('❌ Error al enviar', true);
+  }
+});
+
+document.getElementById('descargar').addEventListener('click', ()=>{
+  const rows = collectRows();
+  if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
+  const headers = Object.keys(rows[0]);
+  const csv = [headers.join(',')].concat(rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'respuestas_psm.csv';
+  a.click();
+});
+
+function csvEsc(v){
+  let s = String(v==null?'':v);
+  if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"';
+  return s;
+}
+
+function setStatus(t, err=false){
+  const el = document.getElementById('status');
+  el.textContent = t;
+  el.style.color = err? '#b00020':'#0a7a0a';
+}
+
+// ---------- Autosave (localStorage) ----------
+function lsKey(){ // clave única por usuario + pilar + elemento + componente
+  const nombre = document.getElementById('nombre').value.trim();
+  const apellido = document.getElementById('apellido').value.trim();
+  const area = document.getElementById('area').value.trim();
+  const p = document.getElementById('pilar').value;
+  const e = document.getElementById('elemento').value;
+  const c = document.getElementById('componente').value;
+  return `psm:${slug(apellido)}:${slug(nombre)}:${slug(area)}:${slug(p)}:${slug(e)}:${slug(c)}`;
+}
+
+let saveTimer = null;
+function scheduleAutosave(){
+  document.getElementById('autosave').textContent = 'Guardando borrador…';
+  if(saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(persist, 600);
+}
+['nombre','apellido','area','fecha','modo','pilar','elemento','componente'].forEach(id=>{
+  const el = document.getElementById(id);
+  el && el.addEventListener('input', scheduleAutosave);
+});
+
+function persist(){
+  const key = lsKey();
+  const payload = {
+    meta: {
+      nombre: document.getElementById('nombre').value,
+      apellido: document.getElementById('apellido').value,
+      area: document.getElementById('area').value,
+      fecha: document.getElementById('fecha').value,
+      modo: document.getElementById('modo').value,
+      pilar: document.getElementById('pilar').value,
+      elemento: document.getElementById('elemento').value,
+      componente: document.getElementById('componente').value
+    },
+    answers: {}
+  };
+  document.querySelectorAll('[data-id]').forEach(n=>{
+    const id = n.dataset.id, k = n.dataset.k;
+    payload.answers[id] = payload.answers[id] || {};
+    payload.answers[id][k] = n.value;
+  });
+  localStorage.setItem(key, JSON.stringify(payload));
+  document.getElementById('autosave').textContent = 'Borrador guardado ✓';
+}
+
+function restoreAnswers(){
+  const key = lsKey();
+  const raw = localStorage.getItem(key);
+  if(!raw) return;
+  try{
+    const data = JSON.parse(raw);
+    // restaurar meta si falta
+    for(const [k,v] of Object.entries(data.meta||{})){
+      const el = document.getElementById(k);
+      if(el && !el.value) el.value = v;
+    }
+    // restaurar respuestas
+    const ans = data.answers||{};
+    for(const [qid,vals] of Object.entries(ans)){
+      for(const [k,val] of Object.entries(vals)){
+        const el = document.querySelector(`[data-id="${qid}"][data-k="${k}"]`);
+        if(el) el.value = val;
+      }
+    }
+    document.getElementById('autosave').textContent = 'Borrador restaurado';
+  }catch(_){}
+}
+
+function clearAutosave(){
+  localStorage.removeItem(lsKey());
+  document.getElementById('autosave').textContent = '';
+}
+</script>
+</body>
+</html>

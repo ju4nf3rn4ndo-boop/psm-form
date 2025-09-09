@@ -1,0 +1,1210 @@
+{
+  "Aprender De La Experiencia": {
+    "Auditorías": [
+      {
+        "id": "AE-A-MPC-105",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se cuenta con un programa de auditorías que incluya seguridad de procesos.",
+        "niveles": {
+          "1-3": "No se cuenta con un programa de auditorías que incluya seguridad de procesos.",
+          "4-6": "Aunque la organización cuenta con un programa de auditorías que incluye seguridad de procesos, no cubre todos los elementos del sistema de seguridad de procesos o no se realiza de forma sistemática.",
+          "8-10": "La organización cuenta con un programa de auditorías que incluye seguridad de procesos con todos los elementos del sistema, y las auditorías se realizan de forma sistemática."
+        }
+      },
+      {
+        "id": "AE-A-MPC-106",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se cuenta con una herramienta de auditoría de ingeniería o equivalente, con enfoque en estándares de industria, códigos de práctica, operaciones unitarias, requisitos legales técnicos.",
+        "niveles": {
+          "1-3": "No se cuenta con una herramienta de auditoría de ingeniería o equivalente, con enfoque en estándares de industria, códigos de práctica, operaciones unitarias, requisitos legales técnicos.",
+          "4-6": "Se cuenta con una herramienta de auditoría de ingeniería o equivalente, con enfoque en estándares de industria, códigos de práctica, operaciones unitarias, requisitos legales técnicos. Esta herramienta es aplicada de manera general, es decir, sin verificación del cumplimiento de los estándares (con escaso o nulo trabajo de campo).",
+          "8-10": "Se cuenta con una herramienta de auditoría de ingeniería o equivalente, con enfoque en estándares de industria, códigos de práctica, operaciones unitarias, requisitos legales técnicos. Esta herramienta es aplicada de manera intensiva con un análisis en campo que garantiza el conocimiento y aplicación de los estándares."
+        }
+      },
+      {
+        "id": "AE-A-MPC-107",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Las auditorías son llevadas a cabo por expertos en el proceso y se han desarrollado cuestionarios específicos de acuerdo a la tipología de estándares.",
+        "niveles": {
+          "1-3": "Las auditorías no son llevadas a cabo por expertos en el proceso y no se han desarrollado cuestionarios específicos de acuerdo a la tipología de estándares.",
+          "4-6": "Las auditorías son llevadas a cabo en ocasiones con el apoyo de expertos en el proceso y se cuenta con algunos cuestionarios específicos de acuerdo a la tipología de estándares.",
+          "8-10": "Las auditorías son llevadas a cabo en su totalidad con el apoyo de expertos en el proceso y se cuenta con cuestionarios específicos de acuerdo a la tipología de estándares."
+        }
+      },
+      {
+        "id": "AE-A-RAP-108",
+        "componente": "Realizar actividades pertinentes",
+        "pregunta": "Se lleva una métrica del número de días destinados para el cierre de las recomendaciones abiertas provenientes de auditorías de seguridad de procesos.",
+        "niveles": {
+          "1-3": "No se lleva una métrica del número de días destinados para el cierre de las recomendaciones abiertas provenientes de auditorías de seguridad de procesos.",
+          "4-6": "Se lleva una métrica del número de días destinados para el cierre de las recomendaciones abiertas provenientes de auditorías de seguridad de procesos.  Esta métrica no muestra tendencia a la mejora.",
+          "8-10": "Se lleva una métrica del número de días destinados para el cierre de las recomendaciones abiertas provenientes de auditorías de seguridad de procesos.  Esta métrica muestra tendencia a la mejora."
+        }
+      },
+      {
+        "id": "AE-A-RAP-109",
+        "componente": "Realizar actividades pertinentes",
+        "pregunta": "El procedimiento de auditorías permite conocer las recomendaciones provenientes de auditorías anteriores que no han sido resueltas.",
+        "niveles": {
+          "1-3": "El procedimiento de auditorías no permite conocer las recomendaciones provenientes de auditorías anteriores que no han sido resueltas.",
+          "4-6": "El procedimiento de auditorías permite conocer las recomendaciones provenientes de auditorías anteriores que no han sido resueltas.  Sin embargo hay un alto porcentaje de recomendaciones que permanecen abiertas (50% o más).",
+          "8-10": "El procedimiento de auditorías permite conocer las recomendaciones provenientes de auditorías anteriores que no han sido resueltas.  Se evidencia que la mayoría (90% 0 más) de las recomendaciones han sido cerradas."
+        }
+      },
+      {
+        "id": "AE-A-UAM-110",
+        "componente": "Utilizar las auditorías para mejorar la efectividad del RBPS",
+        "pregunta": "Se identifican en las auditorías realizadas los hallazagos por causas similares y estos hallazgos generan acciones desde el nivel de dirección.",
+        "niveles": {
+          "1-3": "No se identifican en las auditorías realizadas los hallazagos por causas similares.",
+          "4-6": "Se identifican en las auditorías realizadas los hallazagos por causas similares, sin embargo estos hallazgos no generan acciones desde el nivel de dirección.",
+          "8-10": "Se identifican en las auditorías realizadas los hallazagos por causas similares y estos hallazgos generan acciones desde el nivel de dirección, llevando a que los planes de acción sean más profundos su tratamiento."
+        }
+      }
+    ],
+    "Investigación de incidentes": [
+      {
+        "id": "AE-II-MPC-92",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se tiene un mecanismo para identificar las desviaciones por causas repetidas asociadas a fallas en la seguridad de procesos.",
+        "niveles": {
+          "1-3": "No se cuenta con un mecanismo para identificar las desviaciones por causas repetidas asociadas a fallas en la seguridad de procesos.",
+          "4-6": "Se cuenta con un mecanismo para identificar las desviaciones por causas repetidas asociadas a fallas en la seguridad de procesos, sin embargo no se evidencian acciones para prevenir esta repetitividad.",
+          "8-10": "Se cuenta con un mecanismo para identificar las desviaciones por causas repetidas asociadas a fallas en la seguridad de procesos, se evidencian acciones para prevenir esta repetitividad, se llevan métricas y su tendencia es a disminuir."
+        }
+      },
+      {
+        "id": "AE-II-MPC-93",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se cuenta con una práctica de cuantificar los costos (directos e indirectos) asociados a los eventos ocurridos y potenciales y se relaciona de alguna manera con las métricas financieras (por ejemplo EBITDA).",
+        "niveles": {
+          "1-3": "No se cuenta con una práctica de cuantificar los costos (directos e indirectos) asociados a los eventos ocurridos y potenciales.",
+          "4-6": "Se cuenta con una práctica de cuantificar los costos (directos e indirectos) asociados a los eventos ocurridos y potenciales, sin embargo no se relaciona de alguna manera con las métricas financieras (por ejemplo EBITDA).",
+          "8-10": "Se cuenta con una práctica de cuantificar los costos (directos e indirectos) asociados a los eventos ocurridos y potenciales y se relaciona de alguna manera con las métricas financieras (por ejemplo EBITDA). Se asignan recursos para fortalecer las barreras para prevenir los eventos de mayor impacto, de acuerdo a este análisis."
+        }
+      },
+      {
+        "id": "AE-II-MPC-94",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Los responsables de las notificaciones y los de las investigaciones han sido formados en identificación de desviaciones de proceso y en investigación y análisis de los mismos.",
+        "niveles": {
+          "1-3": "Los responsables de las notificaciones y los de las investigaciones no han sido formados en identificación de desviaciones de proceso y en investigación y análisis de los mismos.",
+          "4-6": "Los responsables de las notificaciones y los de las investigaciones han sido formados en identificación de desviaciones de proceso y en investigación y análisis de los mismos, sin embargo el proceso es básico y no recurren a expertos para apoyar las investigaciones.",
+          "8-10": "Los responsables de las notificaciones y los de las investigaciones han sido formados en identificación de desviaciones de proceso y en investigación y análisis de los mismos. En nivel de formación es suficiente para realizar la mayoría de las investigaciones y para identificar la necesidad de apoyo experto cuando se requiera."
+        }
+      },
+      {
+        "id": "AE-II-IPI-95",
+        "componente": "Identificar potenciales incidentes para ser investigados",
+        "pregunta": "Se cuenta con un análisis de tendencias de reporte e investigación de eventos de proceso.",
+        "niveles": {
+          "1-3": "No se cuenta con un análisis de tendencias de reporte e investigación de eventos de proceso. O se evidenció un número fijo de eventos que se tienen que reportar por unidad de tiempo.",
+          "4-6": "Se cuenta con un análisis de tendencias de reporte e investigación de eventos de proceso, sin embargo esta información no hace parte de las métricas que se presentan en la dirección.",
+          "8-10": "Se cuenta con un análisis de tendencias de reporte e investigación de eventos de proceso. De este análisis se llevan métricas que hacen parte de los informes de rendición de cuentas a la dirección."
+        }
+      },
+      {
+        "id": "AE-II-UTA-96",
+        "componente": "Usar técnicas apropiadas para investigar incidentes",
+        "pregunta": "Los eventos asociados a desviaciones en seguridad de procesos son investigados por un equipo experto (compuesto por personal interno y/o externo), según la naturaleza del evento y/o el proceso.",
+        "niveles": {
+          "1-3": "Los eventos asociados a desviaciones en seguridad de procesos son investigados por personas sin conocimiento del proceso o de las variables involucradas en la desviación.",
+          "4-6": "Los eventos asociados a desviaciones en seguridad de procesos son investigados en ocasiones por un equipo experto (compuesto por personal interno y/o externo), según la naturaleza del evento y/o el proceso.",
+          "8-10": "Todos los eventos asociados a desviaciones en seguridad de procesos son investigados por un equipo experto (compuesto por personal interno y/o externo), según la naturaleza del evento y/o el proceso."
+        }
+      },
+      {
+        "id": "AE-II-DRI-97",
+        "componente": "Documentar resultados de la investigación de incidentes",
+        "pregunta": "El procedimiento de notificación e investigación de eventos de proceso tiene establecidos unos tiempos límite para la gestión, ejemplo: tiempo para la notificación, investigación, presentación del informe a la dirección y cierre de los planes de acción.",
+        "niveles": {
+          "1-3": "El procedimiento de notificación e investigación de eventos de proceso no tiene establecidos unos tiempos límite para la gestión.",
+          "4-6": "El procedimiento de notificación e investigación de eventos de proceso tiene establecidos unos tiempos límite para la gestión; sin embargo, estos tiempos no se cumplen.",
+          "8-10": "El procedimiento de notificación e investigación de eventos de proceso tiene establecidos unos tiempos límite para la gestión.  Los tiempos se cumplen y se lleva métrica."
+        }
+      },
+      {
+        "id": "AE-II-CHO-98",
+        "componente": "Continuar hasta obtener resultados de las investigaciones",
+        "pregunta": "Existe un mecanismo para construir y divulgar las lecciones aprendidas generadas por las investigaciones de eventos ocurridos en la operación o en operaciones con peligros similares.",
+        "niveles": {
+          "1-3": "No existe un mecanismo para construir y divulgar las lecciones aprendidas generadas por las investigaciones de eventos ocurridos en la operación o en operaciones con peligros similares.",
+          "4-6": "Existe un mecanismo para construir y divulgar las lecciones aprendidas generadas por las investigaciones de eventos ocurridos en la operación, sin embargo el alcance no va hasta analizar eventos ocurridos en operaciones con peligros similares.",
+          "8-10": "Existe un mecanismo para construir y divulgar las lecciones aprendidas generadas por las investigaciones de eventos ocurridos en la operación o en operaciones con peligros similares. Este mecanismo hace parte de los procesos de entrenamiento y re entranamiento del personal propio y contratista de la operación."
+        }
+      },
+      {
+        "id": "AE-II-ETI-99",
+        "componente": "Encontrar tendencias para identificar incidentes que puedan repetirse",
+        "pregunta": "Existe la práctica de realizar análisis de tendencias y riesgos asociada a la seguridad de procesos y esta práctica hace parte del modelo de gestión del riesgo de la organización.",
+        "niveles": {
+          "1-3": "No se realiza realiza análisis de tendencias y riesgos asociada a la seguridad de procesos.",
+          "4-6": "Existe la práctica de realizar análisis de tendencias y riesgos asociada a la seguridad de procesos, sin embargo estos análisis no hacen parte del modelo de gestión del riesgo de la organización.",
+          "8-10": "Existe la práctica de realizar análisis de tendencias y riesgos asociada a la seguridad de procesos y esta práctica hace parte del modelo de gestión del riesgo de la organización. Se evidencia que la organización toma acciones anticipadas derivadas de estos análisis."
+        }
+      }
+    ],
+    "Mediciones y métricas": [
+      {
+        "id": "AE-MM-MPC-100",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se llevan métricas de todos los elementos del sistema de seguridad de procesos.  Tanto activas como reactivas.",
+        "niveles": {
+          "1-3": "No se llevan métricas de todos los elementos del sistema de seguridad de procesos o solo se llevan algunas reactivas.",
+          "4-6": "Se llevan métricas de todos los elementos del sistema de seguridad de procesos.  Sin embargo no se comparar con metas propuestas para un periodo.",
+          "8-10": "Se llevan métricas de todos los elementos del sistema de seguridad de procesos.  Las métricas llevadas son tanto activas como reactivas. Además, existe evidencia de que el uso de estas métricas ha conducido a mejoras en el proceso."
+        }
+      },
+      {
+        "id": "AE-MM-MPC-101",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Nivel de conocimiento y capacidad de interpretación de las métricas por parte de los responsables (por procesos y por elemento del sistema de seguridad de procesos).",
+        "niveles": {
+          "1-3": "Las personas relacionadas con la gestión de los procesos desconocen sus métricas o las mal interpretan.",
+          "4-6": "Las personas relacionadas con la gestión de los procesos conocen e intepretan las métricas que les corresponden.",
+          "8-10": "Las personas relacionadas con la gestión de los procesos conocen e intepretan las métricas que les corresponden, además, toman acciones de mejoramiento derivadas de esta interpretación."
+        }
+      },
+      {
+        "id": "AE-MM-RAM-102",
+        "componente": "Realizar una adquisición de métricas",
+        "pregunta": "Se comunican con una periodicidad establecida las métricas que se llevan y su tendencia a las partes interesadas.",
+        "niveles": {
+          "1-3": "No se comunican las métricas que se llevan y su tendencia a las partes interesadas.",
+          "4-6": "Se comunican las métricas que se llevan a las partes interesadas, sin embargo no hay una periodicidad establecida ni se hace análisis de tendencias.",
+          "8-10": "Se comunican con una periodicidad establecida las métricas que se llevan y su tendencia a las partes interesadas. Estas métricas están integradas en el cuadro de mando de la organización o hacen parte del modelo de excelencia operacional."
+        }
+      },
+      {
+        "id": "AE-MM-UMT-103",
+        "componente": "Utilizar las métricas para tomar decisiones correctivas",
+        "pregunta": "Se cuenta con una metodología o propuesta para evaluar el conocimiento de las métricas y sus tendencias en las partes interesadas.",
+        "niveles": {
+          "1-3": "No se cuenta con una metodología o propuesta para evaluar el conocimiento de las métricas y sus tendencias en las partes interesadas.",
+          "4-6": "Se cuenta con una metodología o propuesta para evaluar el conocimiento de las métricas y sus tendencias en las partes interesadas, sin embargo no se aplica sistemáticamente ni se analiza la información obtenida.",
+          "8-10": "Se cuenta con una metodología o propuesta para evaluar el conocimiento de las métricas y sus tendencias en las partes interesadas, esta metodología se aplica sistemáticamente y se analiza la información obtenida."
+        }
+      },
+      {
+        "id": "AE-MM-UMT-104",
+        "componente": "Utilizar las métricas para tomar decisiones correctivas",
+        "pregunta": "Se tienen identificadas las métricas activas y reactivas que son presentadas en las rendiciones de cuentas con el nivel de dirección.",
+        "niveles": {
+          "1-3": "No se tienen identificadas las métricas activas y reactivas que son presentadas en las rendiciones de cuentas con el nivel de dirección. En estas reuniones no se presentan las mismas métricas de forma sistemática.",
+          "4-6": "Se tienen identificadas las métricas activas y reactivas que son presentadas en las rendiciones de cuentas con el nivel de dirección, sin embargo no se presentan en su totalidad por falta de tiempo o interés y no se llega hasta el análisis de tendencias.",
+          "8-10": "Se tienen identificadas las métricas activas y reactivas que son presentadas en las rendiciones de cuentas con el nivel de dirección.  En estas reuniones se presentan en su totalidad con el análisis de tendencias.  El desempeño de estas métricas esta incluido en la evaluación del desempeño de los responsables de los procesos."
+        }
+      }
+    ],
+    "Revisión de la gestión y mejora continua": [
+      {
+        "id": "AE-RGM-MPC-111",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "En los ciclos de revisión por la dirección se incluye la gestión de seguridad de procesos.",
+        "niveles": {
+          "1-3": "En los ciclos de revisión por la dirección no se incluye la gestión de seguridad de procesos.",
+          "4-6": "Aunque se hacen revisiones por la dirección de forma sistemática, los temas de gestión de seguridad de procesos aparecen esporádicamente o cuando ocurren eventos.",
+          "8-10": "Los temas de seguridad de procesos ocupan una parte importante de la agenda de la revisón por la dirección."
+        }
+      },
+      {
+        "id": "AE-RGM-RAR-112",
+        "componente": "Realizar actividades de revisión",
+        "pregunta": "Las propuestas de mejora continua definidas por la organización han llevado a cambios en procesos, equipos, tecnología, controles de ingeniería; que representen una mejora en la seguridad de los procesos.",
+        "niveles": {
+          "1-3": "No se evidencian mejoras en la seguridad de los procesos, aun en los que han sido identificados en las revisiones por la dirección.",
+          "4-6": "Se evidencian algunas mejoras en la seguridad de procesos como resultado de las propuestas de mejora continua presentadas en las revisiones por la dirección, sin embargo la mayoría de propuestas de mejora continuán en fase de proyecto.",
+          "8-10": "Se evidencian mejoras en la seguridad de procesos como resultado de las propuestas de mejora continua presentadas en las revisiones por la dirección."
+        }
+      },
+      {
+        "id": "AE-RGM-RAR-113",
+        "componente": "Realizar actividades de revisión",
+        "pregunta": "Compara la organización los procesos y resultados de su gestión de seguridad de procesos con los de otras organizaciones; con el fin de mejorar su propio desempeño.",
+        "niveles": {
+          "1-3": "La organización no se compara con otras organizaciones con el fin de mejorar su propio desempeño en seguridad de procesos.",
+          "4-6": "La organización se compara con otras organizaciones, sin embargo no se evidencia un mejoramiento de su desempeño en seguridad de procesos como resultado de este aprendizaje.",
+          "8-10": "La organización se compara con otras organizaciones, se evidencia un mejoramiento de su desempeño en seguridad de procesos como resultado de este aprendizaje.  Es un referente en el medio y hace parte de gremios y grupos de mejora continua en seguridad de procesos."
+        }
+      },
+      {
+        "id": "AE-RGM-RAR-114",
+        "componente": "Realizar actividades de revisión",
+        "pregunta": "Existe una metodología o modelo que permita evaluar el nivel de madurez del sistema y la definición de un plan de ruta para elevar los estándares de ingeniería y de proceso.",
+        "niveles": {
+          "1-3": "No existe una metodología o modelo que permita evaluar el nivel de madurez del sistema y la definición de un plan de ruta para elevar los estándares de ingeniería y de proceso.",
+          "4-6": "Existe una metodología o modelo que permita evaluar el nivel de madurez del sistema, si embargo no se evidencia un plan de ruta para elevar los estándares de ingeniería y de proceso.",
+          "8-10": "Existe una metodología o modelo que permita evaluar el nivel de madurez del sistema y la definición de un plan de ruta para elevar los estándares de ingeniería y de proceso. Este plan de ruta ya está en ejecución."
+        }
+      },
+      {
+        "id": "AE-RGM-MDO-115",
+        "componente": "Monitorear el desempeño organizacional",
+        "pregunta": "Se han presentado recomendaciones provenientes de auditorías de seguridad de procesos, que son rechazadas por la gerencia.",
+        "niveles": {
+          "1-3": "Si se han presentado casos de recomendaciones provenientes de auditorías de seguridad de procesos, que son rechazadas por la gerencia. Este tipo de situaciones son frecuentes en la presentación de las auditorías a la gerencia.",
+          "4-6": "Si se han presentado casos de recomendaciones provenientes de auditorías de seguridad de procesos, que son rechazadas por la gerencia. Este tipo de situaciones son esporádicas en la presentación de las auditorías a la gerencia.",
+          "8-10": "No se han presentado casos de recomendaciones provenientes de auditorías de seguridad de procesos, que son rechazadas por la gerencia. La gerencia promueve el reporte de recomendaciones en seguridad de procesos."
+        }
+      },
+      {
+        "id": "AE-RGM-MDO-116",
+        "componente": "Monitorear el desempeño organizacional",
+        "pregunta": "Se evidencian que las revisiones por la dirección son delegadas a subordinados.",
+        "niveles": {
+          "1-3": "Se evidencian que las revisiones por la dirección son delegadas a subordinados.",
+          "4-6": "Se evidencia que algunas de las revisiones por la dirección son delegadas a subordinados.",
+          "8-10": "Todas las revisiones por la dirección son conducidas por la alta dirección."
+        }
+      }
+    ]
+  },
+  "Compromiso": {
+    "Competencia en seguridad de procesos": [
+      {
+        "id": "CO-CSP-MPC-17",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se cuenta con plan para el fortalecimiento de competencias en seguridad de procesos y este tiene presupuesto asignado.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que soporte el plan de fortalecimiento de competencias de seguridad de procesos.",
+          "4-6": "Se cuenta con un plan de fortalecimiento de competencias en seguridad de procesos, el cual no se cumple en su cronograma o tiene una cobertura limitada.",
+          "8-10": "Se cuenta con un plan de fotalecimiento de competencias en seguridad de procesos, el cual tiene claramente definidas las personas objetivo del programa, un plan de formación, presupuesto y métricas."
+        }
+      },
+      {
+        "id": "CO-CSP-MPC-18",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se ha medido la efectividad del plan de fortalecimiento de competencias en seguridad de procesos y se han establecido planes de mejoramiento.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de la realización de evaluación de efectividad de los programas para promover el aprendizaje",
+          "4-6": "Se cuenta con evidencia de la realización de evaluaciones de efectividad de los programas para proover el aprendizaje",
+          "8-10": "Se cuenta con evidencia de la realización de evaluaciones de efectividad de los programas para proover el aprendizaje y estás son tenidas en cuenta en la planeación futura."
+        }
+      },
+      {
+        "id": "CO-CSP-EAA-19",
+        "componente": "Ejecutar actividades que ayuden a mantener y mejorar la competencia de la seguridad de procesos",
+        "pregunta": "Se han considerado como causales de los eventos las desviaciones de ingeniería (fenómenos fisico químicos, de materiales, eléctricos, mecánicos, informáticos, etc.).",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que los equipos de investigación analizan fenómenos fisicoquímicos como causas de posibles de incidentes.",
+          "4-6": "Se cuenta con evidencia que los equipos de investigación analizan fenómenos fisicoquímicos como causas posibles de incidentes.",
+          "8-10": "Se cuenta con evidencia que los equipos de investigación analizan, sistemáticamente, fenómenos fisicoquímicos como causas posibles de incidentes."
+        }
+      },
+      {
+        "id": "CO-CSP-EAA-20",
+        "componente": "Ejecutar actividades que ayuden a mantener y mejorar la competencia de la seguridad de procesos",
+        "pregunta": "Existen equipos o redes de expertos y matrices de autoridades para aprobacion y establecimiento de códigos y prácticas de industria para la aprobacion de cambios,  para la formación especializada, y para el desarrollo, aplicación piloto e implementación de estandares",
+        "niveles": {
+          "1-3": "No se cuenta con equipo o redes de expertos ni matriz de autoridades para: \n- la aprobación y establecimiento de códigos y prácticas de industria\n- Aprobación de cambios\n- Desarrollo, aplicación piloto e implementación  \n- Formación especializada.",
+          "4-6": "Se cuenta parcialmente con equipo o redes de expertos y matriz de autoridades para: \n- la aprobación y establecimiento de códigos y prácticas de industria\n- Aprobación de cambios\n- Formación especializada\n- Desarrollo, aplicación piloto e implementación",
+          "8-10": "Se cuenta con un equipo y una red de expertos, además de una matriz de autoridades para: \n- la aprobación y establecimiento de códigos y prácticas de industria\n- Aprobación de cambios\n- Formación especializada\n- Desarrollo, aplicación piloto e implementación"
+        }
+      }
+    ],
+    "Cultura de seguridad de procesos": [
+      {
+        "id": "CO-CSP-MPC-01",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existe un sistema de seguridad de procesos con  estructura, definición de recursos e indicadores.",
+        "niveles": {
+          "1-3": "No existe.",
+          "4-6": "Esta en proceso de construcción.",
+          "8-10": "Existe un sistema de seguridad de procesos con estructura, definición de recursos e indicadores."
+        }
+      },
+      {
+        "id": "CO-CSP-MPC-02",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Con que frecuencia los miembros de la alta dirección visitan el sitio de trabajo con enfoque al proceso, a los equipos y sistemas.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de visitas de los miembros de la alta dirección al sitio de trabajo",
+          "4-6": "Se cuenta con evidencia de al menos una visita al año de los miembros de alta dirección al sitio de trabajo",
+          "8-10": "Se cuenta con evidencia de al menos una visita semestral de los miembros de alta dirección al sitio de trabajo"
+        }
+      },
+      {
+        "id": "CO-CSP-MPC-03",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Han sido entrenados los gerentes y supervisores (nuevos y antiguos) en seguridad de procesos.",
+        "niveles": {
+          "1-3": "Menos de un 50% de los gerentes y supervisores están entrenados en  seguridad de procesos",
+          "4-6": "Entre 50% y el 90% de los gerentes y supervisores están entrenados en  seguridad de procesos",
+          "8-10": "Más de un 90% de los gerentes y supervisores están entrenados en  seguridad de procesos"
+        }
+      },
+      {
+        "id": "CO-CSP-MPC-04",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Reuniones de alta dirección en que los temas de seguridad de procesos hacen parte de la agenda.",
+        "niveles": {
+          "1-3": "Por lo menos en una reunión por año, los temas de seguridad de procesos son tratados en la alta dirección.",
+          "4-6": "Por lo menos en una reunión por semestre, los temas de seguridad de procesos son tratados en la alta dirección.",
+          "8-10": "Los temas de seguridad de procesos hacen parte de la agenda habitual de las reuniones de la alta dirección."
+        }
+      },
+      {
+        "id": "CO-CSP-MPC-05",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se conocen y llevan métricas de seguridad de procesos (activas y reactivas) y se relacionan con otras métricas de gestión de operaciones, gestión ambiental, gestión de riesgos y tendencias.",
+        "niveles": {
+          "1-3": "No se conocen o no se llevan métricas de seguridad de procesos ni su relación con métricas de la operación como: productividad, calidad y costos.",
+          "4-6": "Se conocen y llevan métricas de seguridad de procesos pero no se relacionanm con otras propias de la operación como: productividad, calidad y costos.",
+          "8-10": "Se cuenta con evidencia que se llevan métricas en seguridad de procesos y se relacionan totalmente con otras métricas de la operación como: productividad, calidad y costos."
+        }
+      },
+      {
+        "id": "CO-CSP-DIC-06",
+        "componente": "Desarrollar e implementar una cultura sólida",
+        "pregunta": "La alta dirección conoce el estado de los planes de acción de las diferentes fuentes de hallazgos (PHA, incidentes, auditorías, inspecciones, etc) y las causas de no cierre oportuno.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que las recomendaciones (de análisis de riesgo, investigaciones de incidentes, auditorías, recomendaciones de seguridad); sean gestionadas y cerradas, en caso de ser gestionadas están por debajo del 50%.",
+          "4-6": "Se cuenta con evidencia parcial que las recomendaciones (de análisis de riesgo, investigaciones de incidentes, auditorías, recomendaciones de seguridad); sean gestionadas y cerradas y su gestión está sobre el 50% y debajo del 90%.",
+          "8-10": "Se cuenta con evidencia que las recomendaciones (de análisis de riesgo, investigaciones de incidentes, auditorías, recomendaciones de seguridad); sean gestionadas y cerradas por encima del 90%."
+        }
+      },
+      {
+        "id": "CO-CSP-DIC-07",
+        "componente": "Desarrollar e implementar una cultura sólida",
+        "pregunta": "Se tiene la practica de identificar y analizar eventos de Seguridad de Proceso ocurridos en la operación, en otras sedes de la empresa o en la industria,  estos analisis hace parte de la agenda de la alta dirección.",
+        "niveles": {
+          "1-3": "No se identifican, ni analizan los eventos de seguirdad de proceos, no se conocen los de otras empresas similares.",
+          "4-6": "Se identifican y analizan algunos por su potencial (menos del 90% de los eventos notificados son investigados)",
+          "8-10": "Se registran y analizan todos los eventos de seguridad de procesos. Hay evidencia de reporte de más del 90% de los casos investigados. También se tienen en cuenta los eventos de otras sedes de la empresa o de la industria con peligros similares."
+        }
+      },
+      {
+        "id": "CO-CSP-DIC-08",
+        "componente": "Desarrollar e implementar una cultura sólida",
+        "pregunta": "Se verifica la oportunidad en notificación, calidad en la investigación y cierres de planes de acción en las investigaciones de los eventos",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que se investiguen incidentes de seguridad de procesos y se realice su respectivo informe",
+          "4-6": "Se cuenta con evidencia que se investiguen incidentes de seguridad de procesos y se realice su respectivo informe, en un período menor a una semana, se verifica su calidad, pero no se cuenta con un equipo de análisis claramente definido",
+          "8-10": "Se cuenta con evidencia que se investiguen incidentes de seguridad de procesos y se realice su respectivo informe, en un período menor a una semana y se cuenta con un equipo de análisis claramente definido y se verifica su calidad"
+        }
+      },
+      {
+        "id": "CO-CSP-DIC-09",
+        "componente": "Desarrollar e implementar una cultura sólida",
+        "pregunta": "Participan las diferentes gerencias en la revisión del sistema de seguridad de procesos y rinden cuentas con relación a su rol.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de la asistencia de los gerentes a las reuniones de revisión de gestión",
+          "4-6": "Se cuenta con evidencia parcial de la asistencia de los gerentes a las reuniones de revisión de gestión",
+          "8-10": "Su cuenta con evidencia de la participación regular de los gerentes a las reuniones de revisión de gestión"
+        }
+      },
+      {
+        "id": "CO-CSP-MGC-10",
+        "componente": "Monitorear y guiar la cultura",
+        "pregunta": "Se realizan conversaciones de seguridad de procesos desde la alta direccion en las que participen diferentes niveles de la organización, incluyendo contratistas. (Los trabajadores y contratistas de los diferentes niveles pueden expresar sus puntos de vista).",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de la realización de conversaciones que incluyan análisis de seguridad de procesos.",
+          "4-6": "Se cuenta con evidencia de la realización de conversaciones que incluyen analisis sobre seguridad de procesos.",
+          "8-10": "Se cuenta con evidencia de la realización de conversaciones que incluya analisis sobre seguridad de procesos y la información colectada ha servido para toma de decisiones y ejecución de acciones."
+        }
+      },
+      {
+        "id": "CO-CSP-MGC-11",
+        "componente": "Monitorear y guiar la cultura",
+        "pregunta": "Los gerentes conducen alguna forma de evaluación de comportamientos con enfasis en seguridad de procesos para concer el alcance del cumplimento de los estandares operacionales y de ingenieria",
+        "niveles": {
+          "1-3": "No lo realizan",
+          "4-6": "se realiza esporádicamente (una o dos veces al año)",
+          "8-10": "se realiza de forma sistemática y conocen la metodología de evaluación de comportamientos y el valor que esta aporta a la generación de cultura de la organización."
+        }
+      }
+    ],
+    "Cumplimiento de estándares": [
+      {
+        "id": "CO-CE-MPC-12",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existe una instancia formal para la revisión, inclusión y adopción de estándares. Referencia a Dec 1347 - Aplicabilidad del Dec 1347 - Debe cumplir como instalacion clasificada.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que permita identificar una instancia formal para la revisión, inclusión y adopción de estándares.",
+          "4-6": "Se cuenta con evidencia que permite identificar al menos una instancia formal para la revisión, inclusión o adopción de estándares.",
+          "8-10": "Se cuenta con una instancia formal para la revisión, inclusión y adopción de estándares; opera sistemáticamente dejando documentación de cada uno de los estándares identificados, conseguidos, analizados, aplicados y mantenidos en el tiempo."
+        }
+      },
+      {
+        "id": "CO-CE-MPC-13",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Están entrenadas las personas encargadas de la aplicación de los estándares.",
+        "niveles": {
+          "1-3": "No se evidencia entrenamiento específico en estándares al personal encargado de hacerlos cumplir.",
+          "4-6": "Se cuenta con entrenamiento en estándares al personal encargado de hacerlos cumplir.  No cubre todo el personal y todos los estándares.",
+          "8-10": "Se cuenta con entrenamiento en estándares al personal encargado de hacerlos cumplir.  Cubre todo el personal encargado de hacer cumplir el estándar y todos los estándares  identificados."
+        }
+      },
+      {
+        "id": "CO-CE-MPC-14",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Los estandares seguidos y aplicados son: los estrictamente legales, de codigos de práctica según el sector o se desarrollan estandares de ingenieria propios.",
+        "niveles": {
+          "1-3": "No se siguen o aplican estándares o se siguen y aplican esporádicamente algunos estrictamente legales.",
+          "4-6": "Se siguen y aplican los estándares estrictamente legales y algunos propios del sector.",
+          "8-10": "Se siguen y aplican los estándares: legales, propios del sector económico incluso algunos propios de la organización."
+        }
+      },
+      {
+        "id": "CO-CE-RAC-15",
+        "componente": "Realizar actividades de cumplimiento",
+        "pregunta": "Existe un direccionamiento del presupuesto (CAPEX) asignado y ejecutado para cumplimiento de estándres.",
+        "niveles": {
+          "1-3": "No se cuenta con CAPEX o se desconoce que parte de este presupuesto se aplica al cumplimiento de estándares.",
+          "4-6": "Se cuenta con CAPEX y se conoce su participación en el cumplimiento de estándares.",
+          "8-10": "Se cuenta con CAPEX y su direccionamiento es claro al cumplimiento de estándares y cierre de brechas encontradas en lo referente a seguridad del proceso."
+        }
+      },
+      {
+        "id": "CO-CE-RAC-16",
+        "componente": "Realizar actividades de cumplimiento",
+        "pregunta": "Frecuencia con la que se hace referenciamiento con otras compañías del sector y forma como se aplican estándares avanzados según códigos de prácticas.",
+        "niveles": {
+          "1-3": "No se hace referenciamiento con otras compañías del sector.",
+          "4-6": "Se hace referenciamiento con otras empresas de forma esporádica y no obedece a un plan.",
+          "8-10": "Se referencia la operación con otras similares y se hace de forma sistemática, obedeciendo a un plan y hace parte de los indicadores proactivos."
+        }
+      }
+    ],
+    "Divulgación a grupos de interés": [
+      {
+        "id": "CO-DGI-MPC-24",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existe un sistema de alerta temprana para la identificación de desviaciones de seguridad de procesos y para la comunicación de las desviaciones a los grupos externos.",
+        "niveles": {
+          "1-3": "No existe un sistema de alerta temprana para la identificación de desviaciones de seguridad de procesos y para la comunicación de las desviaciones a los grupos externos.",
+          "4-6": "Existe un sistema de alerta temprana para la identificación de desviaciones de seguridad de procesos y para la comunicación de las desviaciones a los grupos externos, pero este no es funcional.",
+          "8-10": "Existe un sistema de alerta temprana para la identificación de desviaciones de seguridad de procesos y para la comunicación de las desviaciones a los grupos externos. El sistema es funcional, se ensaya periodicamente en simulaciones."
+        }
+      },
+      {
+        "id": "CO-DGI-MPC-25",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existencia de mecanismos de participación con actores comunitarios en el perímetro de influencia de la actividad.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que permita determinar los actores comunitarios claves y la participación con actores comunitarios en el perímetro de la actividad.",
+          "4-6": "Se cuenta con evidencia de la existencia de mecanismos de participación con actores comunitarios en el perímetro de de la actividad.  La interacción se hace por lo menos una vez al año.",
+          "8-10": "Se cuenta con evidencia del uso de los mecanismos de participación con actores comunitarios en el perímetro de de la actividad. La interracción se hace dos o más veces al año."
+        }
+      },
+      {
+        "id": "CO-DGI-MPC-26",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Revisión sistemática de:\n- Grupos de interés a los que hay que contactar y mantener informados\n- Gremios a pertenecer\n- Información que aparece en medios de comunicación o redes sociales.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de identificación de grupos de interés, gremios a pertenecer o seguimiento a redes sociales o medios de comunicación.",
+          "4-6": "Se tienen identificados grupos de interés, gremios y medios de comunicación incluyendo redes sociales, para ser seguidos.  No se hace de forma sistemática los seguimientos o la participacion en grupos de interés o gremios.",
+          "8-10": "Se tienen identificados grupos de interés, gremios y medios de comunicación incluyendo redes sociales, para ser seguidos.  Se hace de forma sistemática los seguimientos y  la participacion en grupos de interés o gremios."
+        }
+      },
+      {
+        "id": "CO-DGI-MPC-27",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existe un mecanismo de comunicación con grupos de interés externos (veedurías) y divulgación de beneficios.",
+        "niveles": {
+          "1-3": "No se cuenta con un mecanismo de comunicación con grupos de interés externos (veedurías)",
+          "4-6": "Se cuenta con mecanismo de comunicación con grupos de interés externos (veedurías) pero no se utiliza sistemáticamente.",
+          "8-10": "Se cuenta con un mecanismo de comunicación con grupos de interés externos (veedurías), se utiliza sistemáticamente, tiene un responsable de hacerlo y se llevan métricas.  Los beneficios de este mecanismo son divulgados en la organización."
+        }
+      },
+      {
+        "id": "CO-DGI-RAC-28",
+        "componente": "Realizar actividades de comunicación a terceros",
+        "pregunta": "Participación en reuniones con grupos de interés identificados.",
+        "niveles": {
+          "1-3": "No se cuenta con una programación de reuniones con los grupos de interés identificados.",
+          "4-6": "Se cuenta con una programación de reuniones con los grupos de interés identificados, pero no se asiste a todas las reuniones o van personas diferentes descontextualizadas.",
+          "8-10": "Se cuenta con una programación para la participación en los grupos de interés identificados.  Se tienen responsables por cada uno d elos grupos, se consolida informe sobre este aspecto y el informe hace parte de las métricas llevadas a la alta dirección."
+        }
+      },
+      {
+        "id": "CO-DGI-RAC-29",
+        "componente": "Realizar actividades de comunicación a terceros",
+        "pregunta": "Se evalúa y actualiza el plan de atencion de peligros mayores en relacion al plan de contingencia ambiental y se ha armonizado con el plan municipal y el plan nacional.",
+        "niveles": {
+          "1-3": "No se evalúa y actualiza el plan de atencion de peligros mayores en relacion al plan de contingencia ambiental.",
+          "4-6": "Se evalúa y actualiza el plan de atencion de peligros mayores en relacion al plan de contingencia ambiental pero aun no se ha armonizado con el plan municipal y el plan nacional.",
+          "8-10": "Se evalúa y actualiza el plan de atencion de peligros mayores en relacion al plan de contingencia ambiental y se ha armonizado con el plan municipal y el plan nacional."
+        }
+      },
+      {
+        "id": "CO-DGI-RAC-30",
+        "componente": "Realizar actividades de comunicación a terceros",
+        "pregunta": "Gestión de lecciones aprendidas. Decreto 1347. Artículo 2.2.4.12.15. Información disponible al público.  Y Artículo 2.2.4.12.15. Información disponible al público.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia relacionada con la gestión de lecciones aprendidas con grupos de interés.",
+          "4-6": "Se cuenta con evidencia relacionada con la participación en grupos de aprendizaje de lecciones aprendidas",
+          "8-10": "Se cuenta con evidencia relacionada con la participación en grupos de aprendizaje de lecciones aprendidas y se comparten lecciones propias, sea de eventos ocurridos o de eventos NO ocurridos (SST II)."
+        }
+      },
+      {
+        "id": "CO-DGI-RAC-31",
+        "componente": "Realizar actividades de comunicación a terceros",
+        "pregunta": "Tienen un programa de identificación de grupos a ser afectados en casos de pérdidas de contención y la cantidad de personas a ser afectadas.",
+        "niveles": {
+          "1-3": "No se tienen un programa de identificación de grupos a ser afectados en casos de pérdidas de contención y la cantidad de personas a ser afectadas.",
+          "4-6": "Se cuenta con un programa de identificación de grupos a ser afectados en casos de pérdidas de contención y la cantidad de personas a ser afectadas. No está actualizado con los productos, cantidades y procesos.",
+          "8-10": "Se cuenta con un programa de identificación de grupos a ser afectados en casos de pérdidas de contención y la cantidad de personas a ser afectadas. Este programa se actualiza periodicamente en cuento a procesos, productos y cantidades y sus resultados alimentan acciones desde la dirección para la prevencion de eventos mayores y sus consecuencias."
+        }
+      }
+    ],
+    "Participación de la fuerza laboral": [
+      {
+        "id": "CO-PFL-RAT-21",
+        "componente": "Realizar actividades de trabajo",
+        "pregunta": "Existe un mecanismo de comunicación para presentar sugerencias por parte de los trabajadores de todos los niveles de la organización incluyendo contratistas y este mecanismo promueve el auto reporte",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de un medio de comunicación existente para presentar sugerencias por parte de los trabajadores y contratistas.",
+          "4-6": "Existe un medio de comunicación para presentar sugerencias por parte de los trabajadores y contratistas. Su uso es esporádico o no enfocado en temas de seguridad.",
+          "8-10": "Existe un medio de comunicación para presentar sugerencias por parte de los trabajadores y contratistas. Su uso es permanente y es su foco está en las mejoras de seguridad de la operación."
+        }
+      },
+      {
+        "id": "CO-PFL-PAP-22",
+        "componente": "Promover activamente el programa de participación de la fuerza laboral",
+        "pregunta": "Se promueve entre los trabajadores la participación en temas de seguridad de procesos y se muestra por algún medio indicadores al respecto.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de promoción entre los trabajadores de participación en programas o mejoras de seguridad.",
+          "4-6": "Existe una propuesta de promoción para que los trabajadores independiente de su cargo, participen en los programas de seguridad de la empresa.  No hay buena participación en esta propuesta, reflejada en aportes aislados o los que se hacen son por las mismas personas.",
+          "8-10": "Existe una propuesta de promoción para que los trabajadores independiente de su cargo, participen en los programas de seguridad de la empresa.  Hay buena participación en esta propuesta, reflejada en aportes frecuentes de todas las áreas y la divulgación por algún medio de indicadores específicos de esta iniciativa."
+        }
+      },
+      {
+        "id": "CO-PFL-MES-23",
+        "componente": "Monitorear la efectividad del sistema",
+        "pregunta": "Existe un procedimiento de negativa a trabajar en caso de que se identifique una desviación en la seguridad del proceso.",
+        "niveles": {
+          "1-3": "No se cuenta con un procedimiento de negativa a trabajar en caso de que se identifique una desviación en la seguridad del proceso.",
+          "4-6": "Se cuenta con un procedimiento de negativa a trabajar en caso de que se identifique una desviación en la seguridad del proceso. Este procedimiento no es utilizado o se ha hecho efectivo en caso que no se relacionan con la seguridad del proceso.",
+          "8-10": "Se cuenta con un procedimiento de negativa a trabajar en caso de que se identifique una desviación en la seguridad del proceso. Este procedimiento es utilizado y se realizan investigaciones de los casos reportados."
+        }
+      }
+    ]
+  },
+  "Entendimiento": {
+    "Gestión del conocimiento": [
+      {
+        "id": "EN-GC-MPC-32",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Están listadas las especificaciones críticas a ser tenidas sen cuenta para tener y mantener, relacionados con el conocimiento del proceso, por ejemplo:\n- Especificaciones de materiales de construcción (tipos de aceros, policompuestos, plásticos, etc)\n- Especificaciones de los equipos (espesores, placas, etc)\n- Especificaciones eléctricas (FM, UL, clasificación)",
+        "niveles": {
+          "1-3": "No se cuentan con  listados de especificaciones críticas.",
+          "4-6": "Se cuenta con listado de especificaciones críticas de equipos, pero están dasctualizadas o incompletas.",
+          "8-10": "Se cuenta con un listado de especificaciones críticas a ser tenenidas en cuenta, hay un equipo responsable de la construcción y actualización de este listado."
+        }
+      },
+      {
+        "id": "EN-GC-MPC-33",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Información disponible y actualizada sobre conocimiento del proceso:\n- Diagramas de Proceso\n- Diagramas P&ID\n- Planos\n- Manuales\n- Fichas de seguridad de productos químicos\n- Procedimientos\n- Normas y estándares",
+        "niveles": {
+          "1-3": "No se evidencia que se cuente con información que lleve al conocimiento del proceso.",
+          "4-6": "Se identifican algunos vacios de información en el conocimiento del proceso.  Por ejemplo, la información está incompleta, desactualizada o en idiomas diferentes al español.",
+          "8-10": "Se cuenta con información completa sobre conocimiento del proceso, hay un equipo responsable de esta información y la mantiene actualizada y en español."
+        }
+      },
+      {
+        "id": "EN-GC-PAC-34",
+        "componente": "Proteger y actualizar el conocimiento del proceso",
+        "pregunta": "La información del proceso es recopilada, custodiada y actualizada por una persona o área de la organización. \nLa custodia comprende el protocolo de protección de propiedad intelectual.",
+        "niveles": {
+          "1-3": "No hay persona o área encargada de la recopilación, custodia y actualización de la información del proceso.",
+          "4-6": "Se cuenta con una persona o área encargada de la recopilación, custodia y actualización de la información.  Se evidencia que se dedica tiempo insuficiente para la labor, por lo cual está parcialmente ejecutada y con pendientes.",
+          "8-10": "Se cuenta con una persona o área encargada de la recopilación, custodia y actualización de la información.  Se evidencia que se dedica tiempo suficiente para la labor."
+        }
+      },
+      {
+        "id": "EN-GC-PAC-35",
+        "componente": "Proteger y actualizar el conocimiento del proceso",
+        "pregunta": "Se realizan auditorías periódicas de seguridad de procesos para determinar si la información del proceso es precisa, está completa y actualizada.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de la realización de auditorías que cubra el conocimiento del proceso.",
+          "4-6": "En las auditorias que se realizan, se verifica la precisión y calidad de la información del proceso, incluyendo su actualización.  Estas auditorías no son frecuentes (se hacen cada dos años o menos frecuente) o al realizarse no se revisa que la información sea completa, precisa y actualizada.",
+          "8-10": "En las auditorias que se realizan, se verifica la precisión y calidad de la información del proceso, incluyendo su actualización.  Las auditorías se realizan por lo menos una vez al año."
+        }
+      },
+      {
+        "id": "EN-GC-PAC-36",
+        "componente": "Proteger y actualizar el conocimiento del proceso",
+        "pregunta": "Respaldos de la información del proceso.",
+        "niveles": {
+          "1-3": "No se cuenta con respaldos de la información del proceso.",
+          "4-6": "Se cuenta con respaldo de una parte de la información del proceso.",
+          "8-10": "Se cuenta con respaldo de toda la información del proceso, el cual permite recuperarla fácilmente.  Periodicamente se realiza verificación del respaldo."
+        }
+      },
+      {
+        "id": "EN-GC-UCP-37",
+        "componente": "Utilizar el conocimiento del proceso",
+        "pregunta": "Se evalúa el conocimiento y la aplicación de la información del proceso.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia sobre evaluación de conocimiento del proceso.",
+          "4-6": "Esporádicamente se evalúa el conocimiento del proceso por parte del personal responable del mismo: ingeniería, seguridad y salud en el trabajo, proyectos, brigada, entre otros.",
+          "8-10": "Periodicamente (por lo menos una vez al año), se realiza evaluación sobre conocimiento del proceso al personal responsable de construirlo, mantenerlo y actualizarlo."
+        }
+      }
+    ],
+    "Identificación de peligros y análisis de riesgo": [
+      {
+        "id": "EN-IPA-MPC-38",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se ha realizado la identificación de los peligros y la evaluación y valoración de los riesgos mediante alguna metodología (IPEVR).",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia de la aplicación de una metodología de identificación de peligros, evaluación y valoración de riesgos.",
+          "4-6": "Se cuenta con evidencia de la aplicación de una metodología de identificación de peligros, evaluación y valoración de riesgos. La información está desactualizada o incompleta.",
+          "8-10": "Se cuenta con evidencia de la aplicación de metodologías de identificación de peligros, evaluación y valoración de riesgos. La información está completa, actualizada y divulgada a los grupos de interés.  Hay una métrica al respecto."
+        }
+      },
+      {
+        "id": "EN-IPA-MPC-39",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Entendimiento y utilizacion de la matriz de aplicabilidad para la identificacion de programa PHA y de estrategia PSM. (Identificación de cuales áreas o procesos necesitan PHA y cuales no).",
+        "niveles": {
+          "1-3": "No se tienen identificadas las áreas o procesos que requien PHA y cuales no lo requieren.",
+          "4-6": "Se tienen identificadas las áreas que requieren PHA y las que no lo requieren.  Estan en una matriz de aplicabilidad la cual está desactualizada o incompleta.",
+          "8-10": "Se cuenta con una matriz de aplicabilidad para el programa de PHA, esta matriz está completa y actualizada, con las áreas y procesos que requieren PHA y los que no lo requieren."
+        }
+      },
+      {
+        "id": "EN-IPA-MPC-40",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se han realizado simulaciones, modelaciones, estudios comparativos, cuantificaciones estadisticas, etc; para los peligros mayores identificados que puedan causar emisiones no controladas, atmósferas peligrosas, liberacion de tóxicos, incendio o rotura, etc.\n\nReferencia a Dec 1347 - Instalaciones clasificas",
+        "niveles": {
+          "1-3": "No se han realizado simulaciones, modelaciones, estudios comparativos o cuantificaciones estadisticas para los peligros mayores identificados que puedan causar emisiones no controladas, atmósferas peligrosas, liberacion de tóxicos, incendio o rotura.",
+          "4-6": "Se han realizado algunas simulaciones, modelaciones, estudios comparativos o cuantificaciones estadisticas para los peligros mayores identificados que puedan causar emisiones no controladas, atmósferas peligrosas, liberacion de tóxicos, incendio o rotura.",
+          "8-10": "Se han realizado simulaciones, modelaciones, estudios comparativos o cuantificaciones estadisticas para todos los peligros mayores identificados que puedan causar emisiones no controladas, atmósferas peligrosas, liberacion de tóxicos, incendio o rotura."
+        }
+      },
+      {
+        "id": "EN-IPA-MPC-41",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se cuenta con recursos para la utilización de los herramientas de IPEVR.  \nSe han utilizado metodologias de analisis de profundidad aplicadas a los procesos o áreas de proceso y su actualizacion (por ejemplo What If, FMEA y Hazop).\n\nReferencia a Dec 1347 - Inventario sustancias peligrosas y QHA",
+        "niveles": {
+          "1-3": "No se cuenta con los recursos necesarios para garantizar la realización de IPEVR, no se tienen estructuradas metodologías para análisis a profundidad de los procesos.",
+          "4-6": "Se cuentan con recursos limitados para la realización de IPEVR, solo se tienen estructuradas metodologías básicas de SST.",
+          "8-10": "Se cuentan con los recursos suficientes para la realización de IPEVR y existe almenos un líder interno entrenado en metodologías como: What If, FMEA y Hazop."
+        }
+      },
+      {
+        "id": "EN-IPA-LCR-42",
+        "componente": "Llevar a cabo los resultados de la evaluación",
+        "pregunta": "Se cuenta con un sistema para identificar recomendaciones sin resolver después de su fecha límite y las causas del no cierre oportuno.",
+        "niveles": {
+          "1-3": "No se conocen con exactitud las recomendaciones no atendidas",
+          "4-6": "Se conocen las recomendaciones no atendidas pero no se determinan fechas  de intervención",
+          "8-10": "Se conocen las recomendaciones no atendidas y se determinan fechas de intervención y cuando los cierres no son oportunos se identifican las causas."
+        }
+      },
+      {
+        "id": "EN-IPA-LCR-43",
+        "componente": "Llevar a cabo los resultados de la evaluación",
+        "pregunta": "Se evalúa la efectividad de las recomendaciones implementadas (riesgo residual).",
+        "niveles": {
+          "1-3": "No se evalúa la efectividad de las recomendaciones implementadas.",
+          "4-6": "Se evalúa la efectividad de algunas de las recomendaciones implementadas.",
+          "8-10": "Se evalúa la efectividad de todas las recomendaciones implementadas."
+        }
+      },
+      {
+        "id": "EN-IPA-LCR-44",
+        "componente": "Llevar a cabo los resultados de la evaluación",
+        "pregunta": "Se cuenta con un mecanismo para la comunicación de riesgos a partes interesadas internas y externas.",
+        "niveles": {
+          "1-3": "No se cuenta con periodicidad, canales y mecanismos definidos para comunicar el riesgo de manera interna y externa.",
+          "4-6": "Se cuenta con periodicidad, canales y mecanismos definidos para comunicar el riesgo de manera interna o externa, pero no se hace de forma regular o según lo programado.",
+          "8-10": "Se cuenta con periodicidad, canales, mecanismos definidos para comunicar el riesgo de manera interna o externa."
+        }
+      },
+      {
+        "id": "EN-IPA-LCR-45",
+        "componente": "Llevar a cabo los resultados de la evaluación",
+        "pregunta": "Se han implementado sistemas reduntantes en las capas de control, según la naturaleza del proceso, tipología del riesgo y análisis de profundidad realizado.",
+        "niveles": {
+          "1-3": "No se han identificado sistemas reduntantes en las capas de control.",
+          "4-6": "Se han implementado sistemas reduntantes en las capas de control, según la naturaleza del proceso, tipología del riesgo y análisis de profundidad realizado, sin embargo no cubre todos los procesos donde se ha identificado su necesidad.",
+          "8-10": "Se han implementado sistemas reduntantes en las capas de control, según la naturaleza del proceso, tipología del riesgo y análisis de profundidad realizado, esta práctica cubre todos los procesos donde se ha identificado su necesidad."
+        }
+      }
+    ]
+  },
+  "Gestión": {
+    "Conducta en las operaciones": [
+      {
+        "id": "GE-CO-MPC-79",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se lleva un registro de los eventos como consecuencia de causas operacionales.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los eventos como consecuencia de causas operacionales.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar o documentar los eventos como consecuencia de causas operacionales.  No se lleva una métrica y no hay planes de acción para la prevención de estos eventos.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar o documentar los eventos como consecuencia de causas operacionales.  Se lleva una métrica y hay planes de acción para la prevención de estos eventos."
+        }
+      },
+      {
+        "id": "GE-CO-CAO-80",
+        "componente": "Controlar actividades de operación",
+        "pregunta": "Se investigan los eventos en los cuales se excedieron las condiciones seguras de operación.",
+        "niveles": {
+          "1-3": "No se cuenta con información disponible que indique la operación por fuera de los límites de control.",
+          "4-6": "Se investigan los eventos de operación por fuera de los límites de control. No se lleva una métrica y no hay planes de acción para la prevención de estos eventos.",
+          "8-10": "Se investigan los eventos de operación por fuera de los límites de control. Se lleva una métrica y hay planes de acción para la prevención de estos eventos."
+        }
+      },
+      {
+        "id": "GE-CO-CAO-81",
+        "componente": "Controlar actividades de operación",
+        "pregunta": "Existen prácticas y procedimientos para el ajuste fino de señales y de variables de proceso y se realizan simulaciones de señales para garantizar la integridad de los loop de control.",
+        "niveles": {
+          "1-3": "No existen prácticas y procedimientos para el ajuste fino de señales y de variables de proceso.",
+          "4-6": "Existen prácticas y procedimientos para el ajuste fino de señales y de variables de proceso y no se realizan simulaciones de señales para garantizar la integridad de los loop de control.",
+          "8-10": "Existen prácticas y procedimientos para el ajuste fino de señales y de variables de proceso; serealizan simulaciones de señales para garantizar la integridad de los loop de control, además se mantiene registro de esta práctica."
+        }
+      },
+      {
+        "id": "GE-CO-CES-82",
+        "componente": "Controlar el estado de los sistemas y del equipo",
+        "pregunta": "En las auditorías se han hecho hallazgos relacionados a instrumentos y elementos inoperantes o descalibrados.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los hallazgos de instrumentos y elementos inoperantes o descalibrados.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los hallazgos de instrumentos y elementos inoperantes o descalibrados. No se gestionan todos estos hallagos, haciendo que algunos equipos permanezcan en mal estado por uno o varios meses.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los hallazgos de instrumentos y elementos inoperantes o descalibrados, y se convierte en métrica la cual es gestionada con tendencia a disminuir."
+        }
+      },
+      {
+        "id": "GE-CO-CES-83",
+        "componente": "Controlar el estado de los sistemas y del equipo",
+        "pregunta": "Se encuentran formalizadas las rutinas y procedimientos de cambio de turno y existen listas de chequeo o formatos para las variables críticas de control, permisos de trabajo en ejecución o eventos especiales (mantenimientos, pruebas, pilotos, montajes, entre otros).",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los cambios de turno.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los cambios de turno, sin embargo no son sistemáticos o son incompletos.",
+          "8-10": "Se cuenta con rutinas y procedimientos de cambio de turno las cuales incluyen listas de chequeo o formatos para las variables críticas de control, permisos de trabajo en ejecución o eventos especiales (mantenimientos, pruebas, pilotos, montajes, entre otros). Son llevadas de manera sistemática y su documentación permite la trazabilidad del proceso."
+        }
+      },
+      {
+        "id": "GE-CO-MDO-84",
+        "componente": "Monitorear el desempeño organizacional",
+        "pregunta": "Se lleva registro del número de eventos de apagado no planeados",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar las deficiencias en el proceso relacionadas con paradas no planeadas.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar las deficiencias en el proceso relacionadas con paradas no planeadas, sin embargo esta información no genera planes de acción contundentes para su gestión.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar las deficiencias en el proceso relacionadas con paradas no planeadas, esta información genera planes de acción contundentes para su gestión, se llava una métrica con tendencia a la baja."
+        }
+      },
+      {
+        "id": "GE-CO-MDO-85",
+        "componente": "Monitorear el desempeño organizacional",
+        "pregunta": "Se investigan los eventos de activación de los sistemas de seguridad sin planearse o sin justa causa (como pérdidas de contención primaria por válvulas de alivio, discos de ruptura, sistemas scrubber, entre otros).",
+        "niveles": {
+          "1-3": "No se investigan las activaciones del los sistemas de seguridad.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar las activaciones del los sistemas de seguridad, sin embargo no se lleva métrica de esto y no hay plan de acción para gestionar.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar las activaciones del los sistemas de seguridad. Se lleva métrica de esto y hay plan de acción para gestionarlo, con tendencia a bajar."
+        }
+      }
+    ],
+    "Disponibilidad operacional": [
+      {
+        "id": "GE-DO-MPC-75",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se investigan los eventos generados en los arranques y paradas del proceso",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, registrar, evaluar y documentar los eventos que ocurren en el arranque y parada del proceso.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar o documentar los eventos que ocurren en el arranque o parada del proceso. Las investigaciones y análisis de estos eventos están parciales y no se llevan métricas.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, registrar, evaluar o documentar los eventos que ocurren en el arranque y parada del proceso. Las investigaciones y análisis de los eventos se tienen completas, además se llevan métricas y estas muestran tendencia a la baja."
+        }
+      },
+      {
+        "id": "GE-DO-MPC-76",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se han entrenado en los procedimientos de pre arranque y parada del proceso al personal directamente relacionado con el mismo. Esto incluye personal vinculado, contratistas y demás relacionados con el proceso.",
+        "niveles": {
+          "1-3": "No existe la práctica de entrenar al personal asociado a los procesos en los procedimientos de arranque y parada. \nLos procedimientos de arranque y parada del proceso no están documentados.",
+          "4-6": "Los procedimientos de arranque y parada del proceso están documentados y se han divulgado, sin embargo la cobertura al personal objetivo (directos de la empresa y contratista) no esta al 100%.",
+          "8-10": "Los procedimientos de arranque y parada del proceso están documentados y se han divulgado al 100% del personal objetivo (directos de la empresa y contratista)."
+        }
+      },
+      {
+        "id": "GE-DO-MPC-77",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "En la fase de commisioning (puesta en marcha del proceso) de los proyectos nuevos, se han gestionado los riesgos propios de esta fase del proyecto.",
+        "niveles": {
+          "1-3": "No se han gestionado los riesgos propios de la fase de commisioning de los proyectos nuevos.",
+          "4-6": "Se han identificado los peligros propios de la fase de commisioning de los proyectos nuevos y no se evidencia de que en todos los casos se tomen las acciones de control.",
+          "8-10": "Se han gestionado los riesgos propios de esta fase de los proyectos."
+        }
+      },
+      {
+        "id": "GE-DO-MPC-78",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se cuantifican las pérdidas asociadas (materias primas, producto terminado, daño de equipo, tiempos) a desviaciones en los arranques y paradas de procesos.",
+        "niveles": {
+          "1-3": "No se cuantifican las pérdidas asociadas a las desviaciones en las paradas y arranques de los procesos.",
+          "4-6": "Se lleva un registro de las pérdidas asociadas a las desviaciones en las paradas y arranques de los procesos, sin embargo las acciones tomadas no llevan a una disminución en la tendencia de este indicador.",
+          "8-10": "Se lleva un registro de las pérdidas asociadas a las desviaciones en las paradas y arranques de los procesos, las acciones tomadas llevan a una disminución en la tendencia de este indicador."
+        }
+      }
+    ],
+    "Entrenamiento y desempeño": [
+      {
+        "id": "GE-ED-MPC-66",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se han identificado eventos con causas principales asociadas a fallas en entrenamiento o desempeño.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar y cuantificar los eventos que tienen como una de sus causas las fallas en entrenamiento o desempeño.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar y cuantificar los eventos que tienen como una de sus causas las fallas en entrenamiento o desempeño. No se identifican mecanismos para hacer que la tendencia de estos eventos sea a la baja.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar y cuantificar los eventos que tienen como una de sus causas las fallas en entrenamiento o desempeño, se convierten en una métrica que tiene tendencia a la baja."
+        }
+      },
+      {
+        "id": "GE-ED-MPC-67",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Recursos de entrenamiento en seguridad de procesos.",
+        "niveles": {
+          "1-3": "No se cuenta con los recursos necesarios para garantizar el entrenamiento en seguridad de procesos.",
+          "4-6": "Se cuentan con recursos necesarios para garantizar el entrenamiento en seguridad de procesos, pero no se da cobertura a todo el personal objetivo.",
+          "8-10": "Se cuentan con los recursos necesarios para garantizar el entrenamiento en seguridad de procesos, se da cobertura al personal objetivo y existe al menos un lider interno (Champion)."
+        }
+      },
+      {
+        "id": "GE-ED-MPC-68",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existen mecanismos o prácticas desarrolladas para garantizar la idoneidad y permanente re entrenamiento de los expertos en cada área de proceso y en ingeniería.  \nSistemas eléctricos, electrónicas, clasificación de áreas, operaciones unitarias, diseño de procesos, materiales, robótica, transporte, entre otros.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar los roles que requieren certificación o entrenamiento particular en las áreas descritas en la pregunta.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar los roles que requieren certificación o entrenamiento particular en las áreas descritas en la pregunta. Sin embargo su cobertura es parcial.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar los roles que requieren certificación o entrenamiento particular en las áreas descritas en la pregunta. Su cobertura está por encima del 90% del personal objetivo."
+        }
+      },
+      {
+        "id": "GE-ED-PEE-69",
+        "componente": "Proveer entrenamiento efectivo",
+        "pregunta": "Realización de entrenamientos en seguridad de procesos, evaluados y facilitados por personal competente.",
+        "niveles": {
+          "1-3": "Los entrenamientos en seguridad de procesos que se realizan no se evalúan y / o no son facilitados por personal competente.",
+          "4-6": "Los entrenamientos en seguridad de procesos que se realizan se evalúan y en ocasiones no son facilitados por personal competente.",
+          "8-10": "Los entrenamientos en seguridad de procesos que se realizan se evalúan y siempre son facilitados por personal competente."
+        }
+      },
+      {
+        "id": "GE-ED-MDT-70",
+        "componente": "Monitorear el desempeño de los trabajadores",
+        "pregunta": "Verificación de competencias en seguridad de procesos de los trabajadores y contratistas.",
+        "niveles": {
+          "1-3": "No se cuenta con un mecanismo para la verificación en campo de competencias de trabajadores y contratistas en seguridad de procesos.",
+          "4-6": "Se cuenta con un mecanismo para la verificación en campo de competencias de trabajadores y contratistas en seguridad de procesos. Se realiza esporádicamente y no se tienen planes de acción para cierre de brechas.",
+          "8-10": "Se cuenta con un mecanismo para la verificación en campo de competencias de trabajadores y contratistas en seguridad de procesos. Se realiza sistemáticamente y se tienen planes de acción para cierre de brechas."
+        }
+      }
+    ],
+    "Gestión de contratistas": [
+      {
+        "id": "GE-GC-RAT-63",
+        "componente": "Realizar actividades de trabajo por elemento",
+        "pregunta": "Entrenamiento de contratistas requerido  en seguridad de procesos, que se ha llevado a cabo según la programación",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten evaluar y cuantificar el entrenamiento de contratistas en seguridad de procesos según su programación.",
+          "4-6": "Se cuenta con mecanismos que permiten evaluar y cuantificar el entrenamiento de contratistas en seguridad de procesos de acuerdo a su programación. La cobertura de este programa es parcial.",
+          "8-10": "Se cuenta con mecanismos que permiten evaluar y cuantificar el entrenamiento de contratistas en seguridad de procesos según su programación. Se cumple a cabalidad el programa, se valúa y se llevan métricas sobre este, con una cobertura superior al 90 % de la población contratista objetivo."
+        }
+      },
+      {
+        "id": "GE-GC-RAT-64",
+        "componente": "Realizar actividades de trabajo por elemento",
+        "pregunta": "Se cuenta con un programa o mecanismo de captura de sugerencias de mejora al programa de seguridad de procesos, hechas por personal contratista.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten evaluar y adoptar las sugerencias relizadas por personal contratista.",
+          "4-6": "Se cuenta con mecanismos que permiten evaluar y adoptar las sugerencias relizadas por personal contratista. No se incluyen en los análisis todas las recomendaciones recibidas.",
+          "8-10": "Se cuenta con mecanismos que permiten capturar, evaluar y analizar las sugerencias relizadas por personal contratista, y se convierte en una métrica con una tendencia sostenida o al alza."
+        }
+      },
+      {
+        "id": "GE-GC-MES-65",
+        "componente": "Monitorear la efectividad del sistema de manejo de contratistas",
+        "pregunta": "Existen métricas para el desempeño de seguridad de procesos de compañías contratistas y son explícitas contractualmente.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten conocer el desempeño en seguridad de procesos de las compañias contratistas.",
+          "4-6": "Se cuenta con mecanismos que permiten conocer el desempeño en seguridad de procesos de las compañias contratistas, pero este factor no es decisivo para la selección de los contratistas.",
+          "8-10": "Se cuenta con mecanismos que permiten conocer el desempeño en seguridad de procesos de las compañias contratistas.  Este factor es decisivo para la selección de los contratistas y hace parte de la estructura contractual."
+        }
+      }
+    ],
+    "Gestión de emergencias": [
+      {
+        "id": "GE-GE-MPC-86",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Coordinación con actores territoriales involucrados en la atención de emergencias y planeación territorial.\n\nReferencia a Dec 1347 - Numeral de Gestion Emergencias",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten establecer el intercambio de información y soportar el proceso de preparación ante condiciones de emergencia.",
+          "4-6": "Se cuenta con mecanismos que permiten establecer el intercambio de información y soportar el proceso de preparación ante condiciones de emergencia.",
+          "8-10": "Se cuenta con mecanismos que permiten establecer el intercambio de información y soportar el proceso de preparación ante condiciones de emergencia, y los peores escenarios se encuentran visibles en los instrumentos territoriales."
+        }
+      },
+      {
+        "id": "GE-GE-PE-87",
+        "componente": "Prepararse para emergencias",
+        "pregunta": "En el diseño y actualización de planes de planes de emergencia se han incluido los escenarios asociados a fallas en los sistemas de control y sus potenciales desviaciones.",
+        "niveles": {
+          "1-3": "Los planes de emergencia no incluyen los escenarios asociados a fallas en los sistemas de control y sus potenciales desviaciones.",
+          "4-6": "Los planes de emergencia incluyen escenarios asociados a fallas en los sistemas de control y sus potenciales desviaciones, sin embargo no cubre los procesos.",
+          "8-10": "Los planes de emergencia incluyen escenarios asociados a fallas en los sistemas de control y sus potenciales desviaciones, estos planes incluyen todos los procesos y se utilizan metodologías como what if para actualizarlos y ponerlos a prueba."
+        }
+      },
+      {
+        "id": "GE-GE-PE-88",
+        "componente": "Prepararse para emergencias",
+        "pregunta": "Se han documentado errores u omisiones en el plan de emergencia o anexos, asociados a seguridad de procesos, descubiertos durante simulacros y entrenamientos.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, sistematizar y documentar los errores y omisiones en los planes de emergencia, durante los simulacros y entrenamientos.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, sistematizar y documentar los errores u omisiones en los planes de emergencia, durante los simulacros y entrenamientos.  Estos hallazgos no se gestionan en su totalidad.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, sistematizar y documentar los errores u omisiones en los planes de emergencia, durante los simulacros y entrenamientos.  Estos hallazgos se gestionan y tienden a dismunir según las métricas."
+        }
+      },
+      {
+        "id": "GE-GE-PE-89",
+        "componente": "Prepararse para emergencias",
+        "pregunta": "Se lleva registro de las órdenes de trabajo para mantenimiento de los equipos de respuesta a emergencias.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, sistematizar y documentar las órdenes de trabajo de mantenimiento para los equipos de respuesta a emergencias.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, sistematizar y documentar las órdenes de trabajo de mantenimiento para los equipos de respuesta a emergencias. Estas órdenes no están completamente cerradas.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar, sistematizar y documentar las órdenes de trabajo de mantenimiento para los equipos de respuesta a emergencias. Estas órdenes están completamente cerradas."
+        }
+      },
+      {
+        "id": "GE-GE-PPA-90",
+        "componente": "Probar periódicamente la adecuación de los planes y el nivel de preparación",
+        "pregunta": "Se han realizado conversaciones con trabajadores y contratistas, respecto a la percepción del estado de preparación en caso de emergencia de una unidad o instalación específica.",
+        "niveles": {
+          "1-3": "No se realizan sondeos para conocer la opinión de trabajadores y contratistas de la unidad en cuanto a la efectividad y pertinencia de los planes de emergencia.",
+          "4-6": "Se realizan sondeos para conocer la opinión de trabajadores y contratistas de la unidad en cuanto a la efectividad y pertinencia de los planes de emergencia. Esta información no se gestiona como entrada al plan de emergencias.",
+          "8-10": "Se realizan sondeos para conocer la opinión de trabajadores y contratistas de la unidad en cuanto a la efectividad y pertinencia de los planes de emergencia. Esta información se lleva como retorno de experiencias al comité de emergencias."
+        }
+      },
+      {
+        "id": "GE-GE-PPA-91",
+        "componente": "Probar periódicamente la adecuación de los planes y el nivel de preparación",
+        "pregunta": "Se han identificado y relacionado los potenciales escenarios o situaciones de crisis asociados a fallas en los procesos y se ha formalizado su respuesta. (Ejemplos olores ofensivos).",
+        "niveles": {
+          "1-3": "No se cuenta con plan de crisis o el que existe no ha considerado escenarios o situaciones asociados a fallas en los procesos.",
+          "4-6": "Se cuenta con un plan de crisis que ha identificado y relacionado los potenciales escenarios o situaciones de crisis asociados a fallas en los procesos, sin embargo no se ha formalizado su respuesta.",
+          "8-10": "Se cuenta con un plan de crisis que ha identificado y relacionado los potenciales escenarios o situaciones asociados a fallas en los procesos y se ha formalizado su respuesta.  Se cuenta con formatos de respuesta."
+        }
+      }
+    ],
+    "Gestión del cambio": [
+      {
+        "id": "GE-GC-MPC-71",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Existe un procedimiento asociado a la gestión del cambio con alcance en la utilización de técnicas de análisis de profundidad de riesgos como son: Hazop, FMEA, What If, Lopa, entre otros; según la magnitud y tipología del cambio.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar, evaluar y documentar los cambios realizados.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar, evaluar y documentar los cambios realizados, no se utilizan herramientas de análisis de profundidad.",
+          "8-10": "Existe un procedimiento asociado a la gestión del cambio con alcance en la utilización de técnicas de análisis de profundidad de riesgos como son: Hazop, FMEA, What If, Lopa, entre otros; según la magnitud y tipología del cambio. Se utiliza sistemáticamente y hay métricas al respecto que se comparten con la dirección."
+        }
+      },
+      {
+        "id": "GE-GC-MPC-72",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Percepción de gerentes y usuarios rutinarios que creen que el programa de gestión del cambio en ingeniería es efectivo. Este percepción se toma en conversaciones en campo o por medios escritos.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que permite evaluar la percepción de gerentes y usuarios rutinarios, con respecto a la efectividad del programa de gestión del cambio.",
+          "4-6": "Se cuenta con evidencia que permite evaluar la percepción de gerentes y usuarios rutinarios en lo relacionado a la efectividad del programa de gestión del cambio. Estas percepciones se toman en entrevistas de campo o por medios escritos. No se gestionan todas las recomendaciones recibidas.",
+          "8-10": "Se cuenta con evidencia que permite evaluar la percepción de gerentes y usuarios rutinarios en lo relacionado a la efectividad del programa de gestión del cambio. Estas percepciones se toman en entrevistas de campo o por medios escritos. Se gestionan todas las recomendaciones recibidas y se llevan métricas."
+        }
+      },
+      {
+        "id": "GE-GC-ISP-73",
+        "componente": "Identificar situaciones potenciales de cambio",
+        "pregunta": "Garantiza la organización que todos los cambios de ingeniería realizados son sometidos al proceso de gestión de cambio.",
+        "niveles": {
+          "1-3": "No se cuenta con una relación entre los cambios solicitados y los realizados.",
+          "4-6": "Se cuenta con una relación entre los cambios solicitados y los realizados. Esta está por debajo del 90%.",
+          "8-10": "Se cuenta con una relación entre los cambios solicitados y los realizados. Esta es del 90% o superior.  Se lleva métrica y documentación de casos."
+        }
+      },
+      {
+        "id": "GE-GC-CAS-74",
+        "componente": "Completar actividades siguientes que sean necesarias",
+        "pregunta": "Comunicación del cambio a las partes interesadas.",
+        "niveles": {
+          "1-3": "No se cuenta con canales y mecanismos definidos para comunicar los cambios y su gestión a las partes interesadas. Trabajadores directos, indirectos, contratistas, entre otros.",
+          "4-6": "Se cuenta con canales y mecanismos definidos para comunicar los cambios y su gestión a las partes interesadas. No se mide su efectividad en entrevistas de campo o medios escritos.",
+          "8-10": "Se cuenta con canales y mecanismos definidos para comunicar los cambios y su gestión a las partes interesadas. Se mide su efectividad en entrevistas de campo o medios escritos."
+        }
+      }
+    ],
+    "Integridad de activos operacionales y confiabilidad": [
+      {
+        "id": "GE-IAO-IES-56",
+        "componente": "Identificar equipo y sistemas que estén en el alcance del programa de integridad de activos y asignar tareas ITPM",
+        "pregunta": "Se cuenta con un programa para gestión de la integridad de los activos operacionales",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismo para la identificación de equipos críticos para ser incluidos en el programa de integridad de activos operacionales",
+          "4-6": "Se cuenta con mecanismo para la identificación de equipos críticos para ser incluidos en el programa de integridad de activos operacionales. Este programa cubre menos del 80% de los equipos identificados.",
+          "8-10": "Se cuenta con mecanismo para la identificación de equipos críticos para ser incluidos en el programa de integridad de activos operacionales . Este programa cubre 80% o más de los equipos identificados."
+        }
+      },
+      {
+        "id": "GE-IAO-DMC-57",
+        "componente": "Desarrollar y mantener conocimiento, habilidades, procedimientos y herramientas",
+        "pregunta": "Los empleados (independiente de su forma de contratación), de mantenimiento e inspección están certificados en competencias.\nComo ejemplos: soldaduras, metrología, instrumentación y control, CONTE, entre otros.",
+        "niveles": {
+          "1-3": "Los empleados (independiente de su forma de contratación), de mantenimiento e inspección no están certificados en competencias.",
+          "4-6": "Algunos empleados (independiente de su forma de contratación), de mantenimiento e inspección están certificados en competencias.",
+          "8-10": "Todos los empleados (independiente de su forma de contratación), de mantenimiento e inspección están certificados en competencias, y sus certificaciones se mantienen actualizadas."
+        }
+      },
+      {
+        "id": "GE-IAO-AAC-58",
+        "componente": "Asegurar ajuste continuo para un propósito definido",
+        "pregunta": "Se cuenta con un inventario documentado de tareas de inspección, pruebas y mantenimiento preventivo cuya fecha límite esté vigente.",
+        "niveles": {
+          "1-3": "No se cuenta con un inventario documentado de tareas de inspección, pruebas y mantenimiento preventivo cuya fecha límite esté vigente.",
+          "4-6": "Se cuenta parcialmente (incompleto o desactualizado) con un inventario documentado de tareas de inspección, pruebas y mantenimiento preventivo cuya fecha límite esté vigente.",
+          "8-10": "Se cuenta con un inventario completo, documentado y actualizado de tareas de inspección, pruebas y mantenimiento preventivo cuya fecha límite esté vigente."
+        }
+      },
+      {
+        "id": "GE-IAO-AAC-59",
+        "componente": "Asegurar ajuste continuo para un propósito definido",
+        "pregunta": "Se cuenta con un mecanismo para identificar las órdenes de trabajo de reparación de emergencia o no planeadas.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar las órdenes de trabajo de reparación de emergencia o no planeadas",
+          "4-6": "Se cuenta con mecanismos que permiten identificar las órdenes de trabajo de reparación de emergencia o no planeadas, sin embargo no se lleva una métrica.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar las órdenes de trabajo de reparación de emergencia o no planeadas, y se lleva una métrica con tendencia descendente."
+        }
+      },
+      {
+        "id": "GE-IAO-RFD-60",
+        "componente": "Referir fallas y deficiencias de los equipos",
+        "pregunta": "Se cuenta con un mecanismo para identificar las reparaciones temporales actualmente en servicio.",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten identificar y cuantificar las reparaciones temporales que están en servicio.",
+          "4-6": "Se cuenta con mecanismos que permiten identificar y cuantificar las reparaciones temporales que están en servicio, pero no se especifican alertas de temporalidad.",
+          "8-10": "Se cuenta con mecanismos que permiten identificar y cuantificar las reparaciones temporales que están en servicio, y se especifican alertas de temporalidad. Se lleva métrica de estas reparaciones y su tendencia es descendente."
+        }
+      },
+      {
+        "id": "GE-IAO-AD-61",
+        "componente": "Analizar datos",
+        "pregunta": "Se cuenta con mecanismos para cuantificar la confiabilidad de los equipos (o disponibilidad).",
+        "niveles": {
+          "1-3": "No se cuenta con mecanismos que permiten cuantificar la confiabilidad de los equipos.",
+          "4-6": "Se cuenta con mecanismos que permiten cuantificar la confiabilidad de los equipos",
+          "8-10": "Se cuenta con mecanismos que permiten cuantificar la confiabilidad de los equipos y se convierte en una métrica que está asociada a métricas de productividad."
+        }
+      },
+      {
+        "id": "GE-IAO-AD-62",
+        "componente": "Analizar datos",
+        "pregunta": "Se han identificado eventos de: pérdidas de contención, calidad, productividad; asociados a fallas en la integridad de los equipos.",
+        "niveles": {
+          "1-3": "No se cuenta con un mecanismo par asociar los eventos de: pérdidas de contención, calidad, productividad; con las fallas en la integridad de los equipos.",
+          "4-6": "Esporádicamente se han identificado eventos de: pérdidas de contención, calidad, productividad; asociados a fallas en la integridad de los equipos.",
+          "8-10": "Se cuenta con un mecanismo para asociar los eventos de: pérdidas de contención, calidad y productividad con las fallas en la integridad de los equipos."
+        }
+      }
+    ],
+    "Procedimientos operativos": [
+      {
+        "id": "GE-PO-MPC-46",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Procedimientos estándar de operación de todos los procesos, construidos y actualizados. Estos estándares deben incluir las variables críticas de control, las ventanas de operación y las consecuencias de las potenciales desviaciones.",
+        "niveles": {
+          "1-3": "No se cuenta con los procedimientos estándar de operación de los procesos.",
+          "4-6": "Se cuenta con procedimientos estándar de operación de algunos procesos.  Se evidencia que faltan procesos por procedimiento.",
+          "8-10": "Se cuenta con procedimientos estándar de todos los procesos y se mantienen actualizados. Los procedimientos tienen claramente definidas las variables críticas del proceso y sus ventanas de operación."
+        }
+      },
+      {
+        "id": "GE-PO-IPN-47",
+        "componente": "Identificar los procedimientos necesarios de operación",
+        "pregunta": "Actualización períodica de los análisis de tareas críticas (ARO, AST, Task Analysis, etc) y cumplimiento con la programación.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que permite identificar los análisis actualizados de tareas críticas y no se cuenta con un programa para su cumplimiento.",
+          "4-6": "Se hacen análisis parciales de las tareas críticas y no es sistemática su revisión.",
+          "8-10": "Se analizan las tareas críticas de forma sistemática, cumpliendo con una programación."
+        }
+      },
+      {
+        "id": "GE-PO-UPM-48",
+        "componente": "Utilizar los procedimientos para mejorar el desempeño humano",
+        "pregunta": "Se han realizado cambios en los procedimientos como resultado de las investigaciones de eventos.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que permita conocer las investigaciones que generaron cambios a los procedimientos y no se cuenta con un programa de atención de recomendaciones.",
+          "4-6": "Se identifican cambios en los procedimientos a partir de los hallazgos de las investigaciones de eventos.  Sin embargo no se lleva sistemáticamente un programa para la atención de estas recomendaciones.",
+          "8-10": "Se identifica que sistematicamente se han generado cambios en los procedimientos a partir de los hallazgos de las investigaciones de eventos."
+        }
+      },
+      {
+        "id": "GE-PO-UPM-49",
+        "componente": "Utilizar los procedimientos para mejorar el desempeño humano",
+        "pregunta": "Conocimiento por parte de la fuerza laboral de los procedimientos existentes.",
+        "niveles": {
+          "1-3": "No hay información que permita conocer a que personal se les ha divulgado y entrenado en los procedimientos existentes.",
+          "4-6": "Se tienen mecanismos de divulgación y entrenamiento de los procedimientos existentes.  Pero no han sido abarcados todas las personas objetivo, esto se puede evidenciar en entrevistas de campo con operadores de proceso.",
+          "8-10": "Se tienen mecanismos de divulgación y entrenamiento de los procedimientos existentes.  La cobertura está por encima del 95 % del personal objetivo."
+        }
+      },
+      {
+        "id": "GE-PO-APE-50",
+        "componente": "Asegurar que los procedimientos estén actualizados",
+        "pregunta": "Procedimientos estándar de operación actualizados como resultado de investigaciones, requisitos legales, auditorías, códigos de práctica, nuevos procesos, buenas prácticas de manufactura, modelos de excelencia en manufactura, mantenimiento u operación, entre otros.",
+        "niveles": {
+          "1-3": "No se cuenta con evidencia que permite identificar los procedimientos estándar de operación son actualizados como resultado de lo descrito en el planteamiento de este numeral.",
+          "4-6": "Se cuenta con evidencia que permite identificar que los procedimientos estándar de operación son actualizados, pero no todos lo están, no es sistemática su actualización.",
+          "8-10": "Se cuenta con evidencia que permite identificar que los procedimientos estándar de operación son actualizados y se cuenta con un programa para esto, el cual se cumple. Para esta actualización se tienen como entradas las descritas en en planteamiento de este numeral."
+        }
+      }
+    ],
+    "Prácticas de trabajo seguro": [
+      {
+        "id": "GE-PTS-MPC-51",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se han identificado las tareas y lugares que requieren permiso de trabajo seguro y se ha definido la cobertura, alcance y procedimiento seguro para los PTR (Permiso de trabajo riesgoso).",
+        "niveles": {
+          "1-3": "No se han identificado las tareas y lugares que requieren permiso de trabajo seguro ni se se ha definido la cobertura, alcance y procedimiento seguro para los PTR (Permiso de trabajo riesgoso).",
+          "4-6": "Se han identificado las tareas y lugares que requieren permiso de trabajo seguro y se ha definido la cobertura, alcance y procedimiento seguro para los PTR (Permiso de trabajo riesgoso). Tanto la identificación como la cobertura de este programa están incompleta.",
+          "8-10": "Se han identificado las tareas y lugares que requieren permiso de trabajo seguro y se ha definido la cobertura, alcance y procedimiento seguro para los PTR (Permiso de trabajo riesgoso). Se lleva métrica de este programa."
+        }
+      },
+      {
+        "id": "GE-PTS-MPC-52",
+        "componente": "Mantener una práctica confiable",
+        "pregunta": "Se han considerado todos los requisitos legales, normativos y las mejores prácticas para emisión de permisos de trabajo.",
+        "niveles": {
+          "1-3": "No se han considerado todos los requisitos legales, normativos y las mejores prácticas para emisión de permisos de trabajo.",
+          "4-6": "Se han considerado únicamente los requisitos legales para emisión de permisos de trabajo.",
+          "8-10": "En adición a los requisitos legales, se han considerado los requisitos normativos y las mejores prácticas para emisión de permisos de trabajo."
+        }
+      },
+      {
+        "id": "GE-PTS-CEA-53",
+        "componente": "Controlar efectivamente las actividades desligadas del trabajo rutinario",
+        "pregunta": "Realización de acompañamientos durante la ejecución de trabajos de alto riesgo.  Estos acompañamientos pueden ser realizados por: directivos, responsables del área, responsables de HSE.",
+        "niveles": {
+          "1-3": "No se realizan acompañamientos durante la ejecución de trabajos de alto riesgo.",
+          "4-6": "Se realizan acompañamientos por parte de directivos responsables de área, a la realización de trabajos de alto riesgo.  estos acompañamientos son esporádicos y no hay planes de acción de los hallazgos y acuerdos realizados en los acompañamientos.",
+          "8-10": "Se realizan acompañamientos por parte de directivos o jefes responsables de área, a la realización de trabajos de alto riesgo.  estos acompañamientos son frecuentes.  Hay planes de acción de los hallazgos y acuerdos realizados en los acompañamientos."
+        }
+      },
+      {
+        "id": "GE-PTS-CEA-54",
+        "componente": "Controlar efectivamente las actividades desligadas del trabajo rutinario",
+        "pregunta": "La estructura del sistema de permisos para trabajos riesgosos, incluye: \n- La formalidad en la entrega de turnos, tanto presencial como documental.\n- Tiempo transcurrido entre la emisión del permiso y la iniciación del trabajo.\n- Re inspecciones periódicas para identificar cambios de condiciones de emisión.\n- Cambios en los ejecutores\n- Aseguramiento de energías peligrosas",
+        "niveles": {
+          "1-3": "La estructura del sistema de permisos para trabajos riesgosos, NO incluye: \n- La formalidad en la entrega de turnos, tanto presencial como documental.\n- Tiempo transcurrido entre la emisión del permiso y la iniciación del trabajo.\n- Re inspecciones periódicas para identificar cambios de condiciones de emisión.\n- Cambios en los ejecutores\n- Aseguramiento de energías peligrosas",
+          "4-6": "La estructura del sistema de permisos para trabajos riesgosos, incluye parcialmente: \n- La formalidad en la entrega de turnos, tanto presencial como documental.\n- Tiempo transcurrido entre la emisión del permiso y la iniciación del trabajo.\n- Re inspecciones periódicas para identificar cambios de condiciones de emisión.\n- Cambios en los ejecutores\n- Aseguramiento de energías peligrosas",
+          "8-10": "La estructura del sistema de permisos para trabajos riesgosos, incluye completamente: \n- La formalidad en la entrega de turnos, tanto presencial como documental.\n- Tiempo transcurrido entre la emisión del permiso y la iniciación del trabajo.\n- Re inspecciones periódicas para identificar cambios de condiciones de emisión.\n- Cambios en los ejecutores\n- Aseguramiento de energías peligrosas"
+        }
+      },
+      {
+        "id": "GE-PTS-CEA-55",
+        "componente": "Controlar efectivamente las actividades desligadas del trabajo rutinario",
+        "pregunta": "Se cuenta con los elementos y equipos necesarios para la emisón de los permisos y son adecuados a la tipología y frecuencia de los trabajos de alto riesgo que se generan el operación.\nEquipos de medición de atmósferas, trípodes, equipos eléctricos, cuadrilla de rescate, entre otros.",
+        "niveles": {
+          "1-3": "No se cuenta con los elementos y equipos necesarios para la emisón de los permisos y son adecuados a la tipología y frecuencia de los trabajos de alto riesgo que se generan el operación.\nEquipos de medición de atmósferas, trípodes, equipos eléctricos, cuadrilla de rescate, entre otros.",
+          "4-6": "Se cuenta con algunos de estos elementos o si están todos no están en buen estado o calibrados.",
+          "8-10": "Se cuenta con los elementos y equipos necesarios para la emisón de los permisos y son adecuados a la tipología y frecuencia de los trabajos de alto riesgo que se generan el operación.  Estos equipos están en buen estado y calibrados."
+        }
+      }
+    ]
+  }
+}
