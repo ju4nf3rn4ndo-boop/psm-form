@@ -261,7 +261,7 @@ document.getElementById('enviar').addEventListener('click', async()=>{
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({rows})
     });
-    setStatus('✅ Enviado. Revisa PSM_Responses y la carpeta PSM_Envíos.');
+    setStatus('✅ Formulario Enviado.');
     clearAutosave();
   }catch(err){
     setStatus('❌ Error al enviar', true);
