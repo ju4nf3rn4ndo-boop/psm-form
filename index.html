@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Encuesta PSM</title>
   <style>
-    :root{--b:#e5e7eb;--bg:#fafafa}
+    :root{--b:#e5e7eb;--bg:#fafafa;--err:#b00020;--ok:#0a7a0a}
     body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);margin:0;padding:24px}
     .container{max-width:1200px;margin:0 auto;background:white;border:1px solid var(--b);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px}
     h1{margin:0 0 12px 0}
@@ -47,6 +47,15 @@
     td:nth-child(5) input[type="text"]{ min-height:38px; }
     td:nth-child(6) textarea{ min-height:60px; }
     td{ overflow:hidden; }
+
+    /* validación */
+    .invalid{
+      border-color: var(--err)!important;
+      outline: 2px solid rgba(176,0,32,.15);
+      background: #fff7f7;
+    }
+    .hint{ color: var(--err); font-size: 12px; margin-top: 4px; display:none; }
+    .hint.show{ display:block; }
   </style>
 </head>
 <body>
@@ -96,6 +105,8 @@
     <span class="status" id="status"></span>
   </div>
 
+  <div id="global-hint" class="hint"></div>
+
   <table id="tabla">
     <colgroup>
       <col style="width:14%">
@@ -134,22 +145,18 @@ fetch(JSON_URL).then(r=>r.json()).then(d=>{ DATA = d; });
 
 /* ============== LOAD ALL (116) ============== */
 document.getElementById('filtrar').addEventListener('click', ()=>{
-  // valida meta
   const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
-  if (!nombre || !apellido || !area) {
-    setStatus('Completa Nombre, Apellido y Área antes de cargar.', true);
-    return;
-  }
+  if (!nombre || !apellido || !area) { setStatus('Completa Nombre, Apellido y Área antes de cargar.', true); return; }
   if (!DATA) { setStatus('Aún cargando preguntas, intenta de nuevo…', true); return; }
 
-  // aplana todo y ordena por sufijo numérico del QuestionID
   let items = Object.values(DATA).flatMap(pilarObj => Object.values(pilarObj).flat());
   const num = qid => { const t = String(qid||'').split('-').pop(); const n = parseInt(t,10); return isNaN(n)? Infinity : n; };
   items.sort((a,b)=> num(a.id) - num(b.id));
 
   renderRows(items);
-  restoreAnswers(); // intenta restaurar borrador del usuario
+  restoreAnswers();
   computeProgress();
+  persist(); // guarda el estado inicial de la tabla
   setStatus(`Cargadas ${items.length} preguntas.`);
 });
 
@@ -169,23 +176,73 @@ function renderRows(items){
       </td>
       <td>${x.pregunta}</td>
       <td class="small"><details><summary>► Ver guía</summary>${guia||'Sin guía'}</details></td>
-      <td><input type="number" min="1" max="10" data-k="calificacion" data-id="${x.id}" required></td>
+      <td>
+        <input type="number" min="1" max="10" step="1" inputmode="numeric" pattern="[0-9]*"
+          data-k="calificacion" data-id="${x.id}" aria-label="Calificación (1 a 10)">
+      </td>
       <td><input type="text" placeholder="Código doc, URL, ruta…" data-k="registro" data-id="${x.id}"></td>
       <td><textarea rows="2" data-k="observaciones" data-id="${x.id}"></textarea></td>
     `;
     tb.appendChild(tr);
   });
 
-  // autosave + progreso
+  // autosave + validación + progreso
   document.querySelectorAll('[data-id]').forEach(n=>{
-    n.addEventListener('input', ()=>{ scheduleAutosave(); if(n.dataset.k==='calificacion') computeProgress(); });
+    n.addEventListener('input', ()=>{
+      if (n.dataset.k === 'calificacion') validateScore(n, false);
+      scheduleAutosave();
+      if (n.dataset.k === 'calificacion') computeProgress();
+    });
   });
+}
+
+/* ============== VALIDACIÓN CALIFICACIÓN 1–10 ENTERO ============== */
+function isValidInt1to10(v){
+  if (v === '' || v === null || v === undefined) return false;
+  const n = Number(v);
+  if (!Number.isInteger(n)) return false;
+  return n >= 1 && n <= 10;
+}
+function validateScore(input, showMsg=true){
+  const v = input.value.trim();
+  const ok = isValidInt1to10(v);
+  const msg = 'La calificación debe ser un número entero entre 1 y 10.';
+  if (!ok && v !== '') {
+    input.classList.add('invalid');
+    if (showMsg) input.reportValidity?.();
+    input.title = msg;
+    input.setAttribute('aria-invalid','true');
+  } else {
+    input.classList.remove('invalid');
+    input.title = '';
+    input.removeAttribute('aria-invalid');
+  }
+  return ok || v === ''; // válido o vacío (vacío = no responde aún)
+}
+function validateAllScores(){
+  const inputs = Array.from(document.querySelectorAll('input[data-k="calificacion"]'));
+  let invalid = 0;
+  let firstBad = null;
+  inputs.forEach(i=>{
+    const ok = validateScore(i, false);
+    if (!ok && i.value !== '') { invalid++; if (!firstBad) firstBad = i; }
+  });
+  const hint = document.getElementById('global-hint');
+  if (invalid > 0) {
+    hint.textContent = `Hay ${invalid} calificaciones inválidas. Deben ser enteros de 1 a 10.`;
+    hint.classList.add('show');
+    if (firstBad) firstBad.scrollIntoView({behavior:'smooth',block:'center'});
+  } else {
+    hint.textContent = '';
+    hint.classList.remove('show');
+  }
+  return invalid === 0;
 }
 
 /* ============== PROGRESO ============== */
 function computeProgress(){
   const done = Array.from(document.querySelectorAll('input[data-k="calificacion"]'))
-    .filter(i => i.value && !isNaN(parseInt(i.value,10))).length;
+    .filter(i => isValidInt1to10(i.value)).length;
   const pct = TOTAL ? Math.round((done / TOTAL) * 100) : 0;
   document.getElementById('bar').style.width = pct + '%';
   document.getElementById('pct').textContent = pct + '%';
@@ -200,9 +257,7 @@ function makeSubmissionId(nombre, apellido, area){
 function collectRows(){
   const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
   const modo = document.getElementById('modo').value;
-  const fecha = new Date().toISOString().slice(0,10); // ya no se pide, se fija
-
-  // al no haber filtros, enviamos campos vacíos/“Todos” (el backend tolera esto)
+  const fecha = new Date().toISOString().slice(0,10); // fija automática
   const pilar = 'Todos', elemento = 'Todos', componente = '';
 
   const inputs = Array.from(document.querySelectorAll('[data-id]'));
@@ -213,9 +268,8 @@ function collectRows(){
     map[id][k] = n.value;
   });
 
-  // Requerido: calificación; registro/observaciones opcional
   const rows = Object.entries(map)
-    .filter(([,v])=>v.calificacion) // solo envía las con calificación
+    .filter(([,v])=> isValidInt1to10(v.calificacion)) // solo válidas 1–10 enteros
     .map(([id,v])=>({
       submissionId: makeSubmissionId(nombre, apellido, area),
       nombre, apellido, area, fecha, modo,
@@ -233,8 +287,11 @@ document.getElementById('enviar').addEventListener('click', async()=>{
   const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
   if (!nombre || !apellido || !area) { setStatus('Completa Nombre, Apellido y Área.', true); return; }
 
+  // Valida calificaciones antes de enviar
+  if (!validateAllScores()) { setStatus('Corrige las calificaciones inválidas antes de enviar.', true); return; }
+
   const rows = collectRows();
-  if (!rows.length) { setStatus('Debes calificar al menos una pregunta.', true); return; }
+  if (!rows.length) { setStatus('Debes calificar al menos una pregunta con un entero entre 1 y 10.', true); return; }
   if (!ENDPOINT || ENDPOINT.includes('PEGAR_AQUI_TU_URL_EXEC_DE_APPS_SCRIPT')) {
     setStatus('Configura ENDPOINT (Apps Script) o usa CSV.', true); return;
   }
@@ -255,24 +312,33 @@ document.getElementById('enviar').addEventListener('click', async()=>{
 
 /* ============== CSV LOCAL ============== */
 document.getElementById('descargar').addEventListener('click', ()=>{
+  if (!validateAllScores()) { setStatus('Corrige las calificaciones inválidas antes de descargar.', true); return; }
   const rows = collectRows();
-  if(!rows.length){ setStatus('No hay filas con calificación.', true); return; }
+  if(!rows.length){ setStatus('No hay filas válidas (1–10).', true); return; }
   const headers = Object.keys(rows[0]);
   const csv = [headers.join(',')].concat(rows.map(r=>headers.map(h=>csvEsc(r[h])).join(','))).join('\n');
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'respuestas_psm.csv'; a.click();
 });
 function csvEsc(v){ let s = String(v==null?'':v); if(s.includes('"')||s.includes(',')||s.includes('\n')) s = '"' + s.replace(/"/g,'""') + '"'; return s; }
-function setStatus(t, err=false){ const el = document.getElementById('status'); el.textContent = t; el.style.color = err? '#b00020':'#0a7a0a'; }
+function setStatus(t, err=false){ const el = document.getElementById('status'); el.textContent = t; el.style.color = err? 'var(--err)':'var(--ok)'; }
 
-/* ============== AUTOSAVE ============== */
+/* ============== AUTOSAVE EXTENDIDO ============== */
+function hhmm(d=new Date()){
+  try { return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); } catch(_) { return ''; }
+}
+// Clave del borrador basada en meta; si no hay meta aún, usa 'anon'
 function lsKey(){
-  const nombre = val('nombre'), apellido = val('apellido'), area = val('area');
-  return `psm:${slug(apellido)}:${slug(nombre)}:${slug(area)}`;
+  const nombre   = document.getElementById('nombre').value.trim();
+  const apellido = document.getElementById('apellido').value.trim();
+  const area     = document.getElementById('area').value.trim();
+  const base = (nombre || apellido || area) ? `${slug(apellido)}:${slug(nombre)}:${slug(area)}` : 'anon';
+  return `psm:${base}`;
 }
 let saveTimer=null;
 function scheduleAutosave(){
-  document.getElementById('autosave').textContent = 'Guardando borrador…';
+  const el = document.getElementById('autosave');
+  if (el) el.textContent = 'Guardando borrador…';
   if(saveTimer) clearTimeout(saveTimer);
   saveTimer = setTimeout(persist, 500);
 }
@@ -296,12 +362,20 @@ function persist(){
     payload.answers[id] = payload.answers[id] || {};
     payload.answers[id][k] = n.value;
   });
-  localStorage.setItem(key, JSON.stringify(payload));
-  document.getElementById('autosave').textContent = 'Borrador guardado ✓';
+  try {
+    localStorage.setItem(key, JSON.stringify(payload));
+    localStorage.setItem('psm:last', key); // puntero al último borrador
+    const as = document.getElementById('autosave');
+    if (as) as.textContent = 'Borrador guardado ✓ ' + hhmm();
+  } catch(_){}
 }
 function restoreAnswers(){
-  const key = lsKey();
-  const raw = localStorage.getItem(key);
+  let key = lsKey();
+  let raw = localStorage.getItem(key);
+  if (!raw) {
+    const lastKey = localStorage.getItem('psm:last');
+    if (lastKey) { raw = localStorage.getItem(lastKey); if (raw) key = lastKey; }
+  }
   if(!raw) return;
   try{
     const data = JSON.parse(raw);
@@ -316,10 +390,23 @@ function restoreAnswers(){
         if(el) el.value = val;
       }
     }
-    document.getElementById('autosave').textContent = 'Borrador restaurado';
+    const as = document.getElementById('autosave');
+    if (as) as.textContent = 'Borrador restaurado';
   }catch(_){}
 }
 function clearAutosave(){ localStorage.removeItem(lsKey()); document.getElementById('autosave').textContent = ''; }
+
+// Guarda cuando la pestaña se oculta / pierde foco / antes de salir
+document.addEventListener('visibilitychange', ()=>{ if (document.visibilityState === 'hidden') { try { persist(); } catch(_){} }});
+window.addEventListener('blur', ()=>{ try { persist(); } catch(_){} });
+window.addEventListener('beforeunload', ()=>{ try { persist(); } catch(_){} });
+
+// Heartbeat: guarda cada 30 s
+setInterval(()=>{ try { persist(); } catch(_){} }, 30000);
+
+// Restaura automáticamente al cargar
+window.addEventListener('load', ()=>{ try { restoreAnswers(); } catch(_){} });
+
 </script>
 </body>
 </html>
